@@ -9,7 +9,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
-    
   },
   "author": "saba timothy",
   "license": "MIT",
@@ -17,6 +16,8 @@
     "nodemon": "^3.1.4"
   },
   "dependencies": {
+    "express": "^4.19.2",
+    "pubnub": "^8.2.7",
     "uuid": "^10.0.0"
   }
 }
