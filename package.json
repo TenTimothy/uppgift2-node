@@ -8,19 +8,19 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "dev-node": "cross-evn GENERATE_NODE_PORT='true' nodemon server.mjs"
+   
   },
   "author": "saba timothy",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^3.1.4",
-    "vitest": "^2.0.5"
+    "nodemon": "^3.1.4"
   },
   "dependencies": {
     "express": "^4.19.2",
     "node-dev": "^8.0.0",
     "pubnub": "^8.2.7",
-    "uuid": "^10.0.0",
-    "ws": "^8.18.0"
+    "uuid": "^10.0.0"
   }
 }
