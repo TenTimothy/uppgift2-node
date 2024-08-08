@@ -1,5 +1,5 @@
 import { it, describe, expect, beforeEach } from 'vitest';
-import Wallet from '../models/Wallet.mjs';
+import Wallet from './models/Wallet.mjs';
 
 describe('Wallet', ()=> {
     let Wallet;
