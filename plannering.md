@@ -35,8 +35,8 @@ För VG ska TDD användas för transaktionshanteringen. Alla ”Best practices�
 
 
 1. Setup
- - Skapa projektmappar för server och klient.
- - Initiera npm-projekt och installera nödvändiga beroenden.
+ - Skapa projektmappar för server och klient. DONE
+ - Initiera npm-projekt och installera nödvändiga beroenden. DONE
 
 2. Användarhantering
  - Skapa användarmodell i MongoDB
