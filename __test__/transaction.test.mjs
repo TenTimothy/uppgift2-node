@@ -1,7 +1,7 @@
-import { it, describe, expect, beforeEach} from vitest;
+import { it, describe, expect, beforeEach} from 'vitest';
 import Wallet from "../models/Wallet.mjs";
 import { verifySignature } from "../utils/crypto-lib.mjs";
-import Transaction from '..models/Transaction.mjs';
+import Transaction from '../models/Transaction.mjs';
 
 describe('Transaction', () => {
     let transaction, sender, recipient, amount;
@@ -19,14 +19,24 @@ describe('Transaction', () => {
             expect(transaction).toHaveProperty('id');
         });
 
-        
         it('should have a property named outputMap', () => {
             expect(transaction).toHaveProperty('outputMap');
         });
 
-
         it('should have a property named inputMap', () => {
             expect(transaction).toHaveProperty('inputMap');
+        });
+    });
+
+    describe('outputMap()', () => {
+        it('should display the recipient\'s balance', () => {
+            expect(transaction.outputMap[recipient]).toEqual(amount);
+        });
+
+        it('should display the sender\'s balance', () => { 
+            expect(transaction.outputMap[sender.publicKey]).toEqual(
+                sender.balance - amount
+            );
         });
     });
 });
