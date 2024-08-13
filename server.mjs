@@ -1,7 +1,19 @@
 import express from 'express'; 
+import dotenv from 'dotenv';
 import PubNubServer from './pubNubServer.mjs';
 
-export const PubNubServer = new PubNubServer({blockchain: blockchain});
+
+dotenv.congif({path: './config/config.env'});
+
+const credentials = {
+    publishKey: process.env.PUBLISH_KEY,
+    subscribehKey: process.env.SUBSCRIBE_KEY,
+    secretKey: process.env.SECRETE_KEY,
+    userId: process.env.USER_Id,
+};
+
+//export const blockchain = new blockchain(); 
+export const PubNubServer = new PubNubServer({blockchain: blockchain, credentials: credentials});
 
 
 const app = express();
