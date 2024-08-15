@@ -5,6 +5,9 @@ export const createTransaction = (req, res, next) => {
     try {
         const { recipient, amount } = req.body;
         const sender = new Wallet(); 
+        
+        console.log(`Sender's balance: ${sender.balance}`);
+        
         const transaction = sender.createTransaction({ recipient, amount });
 
         res.status(201).json({ success: true, data: transaction });
@@ -12,4 +15,3 @@ export const createTransaction = (req, res, next) => {
         next(error);
     }
 };
-
