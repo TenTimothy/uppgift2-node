@@ -12,7 +12,7 @@ const credentials = {
     userId: process.env.USER_Id,
 };
 
-//export const blockchain = new blockchain(); 
+export const blockchain = new blockchain(); 
 export const PubNubServer = new PubNubServer({blockchain: blockchain, credentials: credentials});
 
 

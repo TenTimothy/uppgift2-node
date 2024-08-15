@@ -15,3 +15,8 @@ export const GENESIS_DATA = {
 
 };
 
+export const MINING_REWARD = 50; // Belöningen för att bryta ett nytt block
+
+export const REWARD_INPUT = {
+    address: '*authorized-reward*', // Den speciella avsändaradressen för belöningstransaktioner
+};

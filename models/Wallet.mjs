@@ -1,5 +1,6 @@
 import { INITIAL_BALANCE } from "../config/settings.mjs";
 import { ellipticHash, createHash } from "../utils/crypto-lib.mjs";
+import Transaction from "./Transaction.mjs";
 
 
 export default class Wallet {
@@ -12,4 +13,10 @@ export default class Wallet {
     sign(data) {
         return this.keyPair.sign(createHash(data));
     };
+
+    createTransaction({ recipent, amount }) {
+        if (amount > this.balance) throw new Error('Not enough funds!');
+
+        return new Transaction({ sender: this, recipient, amount});
+    }
 };

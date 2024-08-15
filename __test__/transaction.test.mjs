@@ -87,4 +87,36 @@ describe('Transaction', () => {
             });
         });
     });
+
+    describe('Update transaction', () => {
+        let orgSignature, orgSenderOutput, nextRecipient, nextAmount;
+
+        describe('and the amount is invalid(not enough funds)', () => {
+            it('should throw an error', () => {
+                expect(() => {
+                    transaction.update({ sender, recipient, amount: 1010 });
+                }).toThrow('Not enough funds!');
+            });
+        });
+
+        describe('and the amount is valid', () => {
+            beforeEach(() => {
+                orgSignature = transaction.input.signature;
+                orgSenderOutput = transaction.outputMap[sender.publicKey];
+                nextAmount = 25;
+                nextRecipient = 'Saba';
+
+                transaction.update({
+                    sender,
+                    recipient: nextRecipient,
+                    amount: nextAmount,
+                });
+            });
+
+            it('should display the amount for the next recipient', () => {
+                expect(transaction.outputMap[sender.publicKey]).toEqual(nextAmount);
+            });
+
+        })
+    })
 });
