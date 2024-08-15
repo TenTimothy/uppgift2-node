@@ -3,7 +3,9 @@ import dotenv from 'dotenv';
 import PubNubServerClass from './pubNubServer.mjs'; 
 import blockchainRouter from './routes/blockchainRoute.mjs'; 
 import transactionRoute from './routes/transactionRoute.mjs'; 
+import transactionPoolRoute from './routes/transactionPoolRoute.mjs'; 
 import Blockchain from './models/Blockchain.mjs'; 
+import TransactionPool from './models/TransactionPool.mjs';
 
 dotenv.config({ path: './config/config.env' });
 
@@ -15,9 +17,10 @@ const credentials = {
 };
 
 const blockchain = new Blockchain(); 
+const transactionPool = new TransactionPool();
 const pubNubServer = new PubNubServerClass({ blockchain, credentials });
 
-export { pubNubServer, blockchain };
+export { pubNubServer, blockchain, transactionPool };
 
 const app = express();
 app.use(express.json());
@@ -32,7 +35,8 @@ setTimeout(() => {
 }, 1000);
 
 app.use('/api/v1/blockchain', blockchainRouter);
-app.use('/api/v1/transactions', transactionRoute);  // Använd transactionRoute för transaktioner
+app.use('/api/v1/transactions', transactionRoute); 
+app.use('/api/v1/transaction-pool', transactionPoolRoute);
 
 const synchronize = async () => {
     const response = await fetch(`${ROOT_NODE}/api/v1/blockchain`);
