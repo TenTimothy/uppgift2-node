@@ -1,5 +1,5 @@
 import hexToBinary from 'hex-to-binary';
-import { GENESIS_DATA } from '../config/settings.mjs'; // Se till att denna import är korrekt
+import { GENESIS_DATA } from '../config/settings.mjs'; 
 import { createHash } from '../utils/crypto-lib.mjs';
 
 export default class Block {
@@ -13,7 +13,7 @@ export default class Block {
     }
 
     static genesis() {
-        return new this(GENESIS_DATA); // Se till att GENESIS_DATA är korrekt definierad och importerad
+        return new this(GENESIS_DATA);
     }
 
     static mineBlock({ lastBlock, data }) {

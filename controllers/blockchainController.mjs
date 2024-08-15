@@ -1,5 +1,6 @@
 import { pubNubServer, blockchain } from "../server.mjs";
 
+
 export const getBlockchain = (req, res, next) => {
     console.log('Handling GET /api/v1/blockchain');
     try {
@@ -34,7 +35,7 @@ export const mineBlock = (req, res, next) => {
 
     const block = blockchain.addBlock({ data: data});
 
-    PubNubServer.broadcast();
+    pubNubServer.broadcast();
 
     res.status(201).json({ success: true, satusCode: 201, data: block });
 };

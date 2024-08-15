@@ -13,10 +13,15 @@ export default class Wallet {
     sign(data) {
         return this.keyPair.sign(createHash(data));
     };
-    
-    createTransaction({ recipient, amount }) {
-        if (amount > this.balance) throw new Error('Not enough funds!');
-        return new Transaction({ sender: this, recipient, amount });
+
+createTransaction({ recipient, amount }) {
+    if (!recipient || !amount) {
+        throw new Error('Recipient and amount are required.');
     }
+
+    if (amount > this.balance) throw new Error('Not enough funds!');
+    return new Transaction({ sender: this, recipient, amount });
+}
+
     
 };
