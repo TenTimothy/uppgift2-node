@@ -1,6 +1,5 @@
 import Block from './Block.mjs';
 import Transaction from './Transaction.mjs';
-import { MINE_RATE, GENESIS_DATA } from '../config/settings.mjs';
 
 export default class Blockchain {
     constructor() {
@@ -53,7 +52,7 @@ export default class Blockchain {
 
             if (lastHash !== lastBlock.hash) return false;
 
-            const recalculatedHash = Block.calculateHash(timestamp, lastHash, data, nonce, difficulty);
+            const recalculatedHash = Block.calculateHash({ timestamp, lastHash, data, nonce, difficulty });
             if (hash !== recalculatedHash) return false;
         }
 

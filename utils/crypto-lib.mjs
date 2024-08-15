@@ -1,5 +1,7 @@
 import crypto from "crypto";
-import { ec } from "elliptic";
+import pkg from 'elliptic';
+
+const { ec } = pkg;
 
 export const createHash = (...args) => {
     return crypto.createHash('sha256').update(args.sort().join('')).digest('hex');

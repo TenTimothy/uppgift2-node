@@ -23,6 +23,7 @@
     "dotenv": "^16.4.5",
     "elliptic": "^6.5.6",
     "express": "^4.19.2",
+    "hex-to-binary": "^1.0.1",
     "node-dev": "^8.0.0",
     "pubnub": "^8.2.7",
     "uuid": "^10.0.0"
