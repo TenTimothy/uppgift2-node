@@ -1,3 +1,4 @@
+import Blockchain from '../models/Blockchain.mjs'; 
 import { pubNubServer, blockchain } from "../server.mjs";
 
 
@@ -26,8 +27,20 @@ export const getBlockByIndex = (req, res, next) => {
 };
 
 export const validateBlockchain = (req, res, next) => {
-    const isValid = blockchain.validateChain();
-    res.status(200).json({ success: isValid, valid: isValid });
+    try {
+        console.log("Starting blockchain validation...");
+        const chain = blockchain.getChain();
+        const isValid = Blockchain.isValidChain(chain);
+        console.log("Blockchain validation result:", isValid);
+        res.status(200).json({ success: true, valid: isValid });
+    } catch (error) {
+        console.error("Error during blockchain validation:", error.message);
+        if (typeof next === 'function') {
+            next(error);
+        } else {
+            res.status(500).json({ success: false, message: "Server error" });
+        }
+    }
 };
 
 export const mineBlock = (req, res, next) => {

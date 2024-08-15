@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
     getBlockchain(req, res);
 });
 
-// POST /api/v1/blockchain/mine - "Mine" ett nytt block
-router.post('/mine', (req, res) => {
-    console.log('POST request received at /api/v1/blockchain/mine');
-    mineBlock(req, res);
+// GET /api/v1/blockchain/validate - Validera hela blockkedjan
+router.get('/validate', (req, res) => {
+    console.log('GET request received at /api/v1/blockchain/validate');
+    validateBlockchain(req, res);
 });
 
 // GET /api/v1/blockchain/:index - Hämta ett specifikt block baserat på index
@@ -21,10 +21,10 @@ router.get('/:index', (req, res) => {
     getBlockByIndex(req, res);
 });
 
-// GET /api/v1/blockchain/validate - Validera hela blockkedjan
-router.get('/validate', (req, res) => {
-    console.log('GET request received at /api/v1/blockchain/validate');
-    validateBlockchain(req, res);
+// POST /api/v1/blockchain/mine - "Mine" ett nytt block
+router.post('/mine', (req, res) => {
+    console.log('POST request received at /api/v1/blockchain/mine');
+    mineBlock(req, res);
 });
 
 export default router;
