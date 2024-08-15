@@ -7,9 +7,9 @@ export const createTransaction = (req, res, next) => {
         const sender = new Wallet(); 
         const transaction = sender.createTransaction({ recipient, amount });
 
-
         res.status(201).json({ success: true, data: transaction });
     } catch (error) {
         next(error);
     }
 };
+

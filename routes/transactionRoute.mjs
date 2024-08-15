@@ -3,6 +3,6 @@ import { createTransaction } from '../controllers/transactionController.mjs';
 
 const router = Router();
 
-router.post('/transactions', createTransaction);
+router.post('/', createTransaction); 
 
 export default router;
