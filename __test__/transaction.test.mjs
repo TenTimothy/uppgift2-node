@@ -95,13 +95,13 @@ describe('Transaction', () => {
             it('should throw an error', () => {
                 expect(() => {
                     transaction.update({ sender, recipient, amount: 1010 });
-                }).toThrow('Not enough funds!');
+                }).toThrow('Amount exceeds balance'); 
             });
         });
 
         describe('and the amount is valid', () => {
             beforeEach(() => {
-                orgSignature = transaction.input.signature;
+                orgSignature = transaction.inputMap.signature; 
                 orgSenderOutput = transaction.outputMap[sender.publicKey];
                 nextAmount = 25;
                 nextRecipient = 'Saba';
@@ -114,7 +114,7 @@ describe('Transaction', () => {
             });
 
             it('should display the amount for the next recipient', () => {
-                expect(transaction.outputMap[sender.publicKey]).toEqual(nextAmount);
+                expect(transaction.outputMap[nextRecipient]).toEqual(nextAmount);
             });
 
         })
