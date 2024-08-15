@@ -7,6 +7,10 @@ export default class Blockchain {
         this.transactionPool = [];
     }
 
+    getChain() {
+        return this.chain;
+    }
+
     addBlock({ data }) {
         const lastBlock = this.chain[this.chain.length - 1];
         const newBlock = Block.mineBlock({ lastBlock, data });

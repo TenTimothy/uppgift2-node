@@ -1,8 +1,16 @@
 import { pubNubServer, blockchain } from "../server.mjs";
 
 export const getBlockchain = (req, res, next) => {
-    res.status(200).json({ success: true, data: blockchain.getChain() });
-};
+    console.log('Handling GET /api/v1/blockchain');
+    try {
+        res.status(200).json({
+            success: true,
+            data: blockchain.getChain()  
+        });
+    } catch (error) {
+        return next(error);
+    }
+};;
 
 export const getBlockByIndex = (req, res, next) => {
     const { index } = req.params;
