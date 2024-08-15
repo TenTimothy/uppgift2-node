@@ -1,44 +1,43 @@
-import express from 'express'; 
+import express from 'express';
 import dotenv from 'dotenv';
 import PubNubServer from './pubNubServer.mjs';
+import blockchainRouter from './routes/blockchainRoute.mjs';
+import transactionRouter from './routes/transactionRoute.mjs';
 
-
-dotenv.congif({path: './config/config.env'});
+dotenv.config({ path: './config/config.env' });
 
 const credentials = {
     publishKey: process.env.PUBLISH_KEY,
-    subscribehKey: process.env.SUBSCRIBE_KEY,
-    secretKey: process.env.SECRETE_KEY,
-    userId: process.env.USER_Id,
+    subscribeKey: process.env.SUBSCRIBE_KEY,
+    secretKey: process.env.SECRET_KEY,
+    userId: process.env.USER_ID,
 };
 
-export const blockchain = new blockchain(); 
-export const PubNubServer = new PubNubServer({blockchain: blockchain, credentials: credentials});
-
+export const blockchain = new Blockchain();
+export const pubNubServer = new PubNubServer({ blockchain, credentials });
 
 const app = express();
-app.use.apply(express.json());
+app.use(express.json());
 
 const DEFAULT_PORT = 3001;
 const ROOT_NODE = `http://localhost:${DEFAULT_PORT}`;
 
-let NODE_PORT; 
+let NODE_PORT;
 
-setTimeout(()=> {
-    PubNubServer.broadcast();
+setTimeout(() => {
+    pubNubServer.broadcast();
 }, 1000);
 
 app.use('/api/v1/blockchain', blockchainRouter);
-app.use('/api/v1/block', blockRoute);
+app.use('/api/v1/transactions', transactionRouter); 
 
 const synchronize = async () => {
-    const response = await fetch (`${ROOT_NODE}/api/v1/blockchain`);
+    const response = await fetch(`${ROOT_NODE}/api/v1/blockchain`);
     if (response.ok) {
         const result = await response.json();
         console.log('SYNC', result.data);
         blockchain.replaceChain(result.data);
-        
-    };
+    }
 };
 
 const PORT = NODE_PORT || DEFAULT_PORT;
@@ -46,7 +45,7 @@ const PORT = NODE_PORT || DEFAULT_PORT;
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 
-    if (PORT!== DEFAULT_PORT) {
+    if (PORT !== DEFAULT_PORT) {
         synchronize();
     }
 });
