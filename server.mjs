@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import PubNubServer from './pubNubServer.mjs';
-import blockchainRouter from './routes/blockchainRoute.mjs';
-import transactionRouter from './routes/transactionRoute.mjs';
+import blockchainRouter from './route/blockchainRoute.mjs';
+import transactionRouter from './route/transactionRoute.mjs';
 
 dotenv.config({ path: './config/config.env' });
 
