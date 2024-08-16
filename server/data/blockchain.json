@@ -8,79 +8,11 @@
     "difficulty": 3
   },
   {
-    "timestamp": 1723806125816,
+    "timestamp": 1723807042946,
     "lastHash": "0",
-    "hash": "129ddd8924aa4a0b7948e26c061c18698b4fc8f42b105d07e5e29ed1706c69ed",
-    "data": [
-      {
-        "id": "7e538b48b6d14ff7987d7dd299192329",
-        "outputMap": {
-          "recipient-address": 300,
-          "03154ab81b9b2e06276a204b1e31834bcbcb3b4e84c6fd40b2be0f7e5bae0e7456": 700
-        },
-        "inputMap": {
-          "timestamp": 1723806107195,
-          "amount": 1000,
-          "address": "03154ab81b9b2e06276a204b1e31834bcbcb3b4e84c6fd40b2be0f7e5bae0e7456",
-          "signature": {
-            "r": "d1b79227cf3f1ea3fd6d99050b4c9ef0737ab3e90aed50665fa00d24bb7ab0e7",
-            "s": "6fb71f3386e7648482a6bf8f8825f918a5363c3a2b674cab55741ecfd1d476ca",
-            "recoveryParam": 0
-          }
-        }
-      },
-      {
-        "id": "4b3ba4b4b64142549b81ebdd7386d5e6",
-        "outputMap": {
-          "din-miner-adress-här": 50
-        },
-        "inputMap": {
-          "timestamp": 1723806125816,
-          "amount": 50,
-          "address": "*authorized-reward*",
-          "signature": null
-        }
-      }
-    ],
+    "hash": "0704fa31ab134dab4ffa01dd81716fdae75b7c0bda75695b469888a0d3b6e01c",
+    "data": "block 1",
     "nonce": 1,
-    "difficulty": 3
-  },
-  {
-    "timestamp": 1723806399389,
-    "lastHash": "129ddd8924aa4a0b7948e26c061c18698b4fc8f42b105d07e5e29ed1706c69ed",
-    "hash": "1cc31315e03983f9660d12d862538eebe7a7869708584e2865388bd619777030",
-    "data": [
-      {
-        "id": "82a5a13e197b460581de7daba443698e",
-        "outputMap": {
-          "recipient-address": 450,
-          "0336475c469fce91128069383718abf314ffcc4b13c3ab9f6dbe1bcc0585ece4d4": 550
-        },
-        "inputMap": {
-          "timestamp": 1723806391775,
-          "amount": 1000,
-          "address": "0336475c469fce91128069383718abf314ffcc4b13c3ab9f6dbe1bcc0585ece4d4",
-          "signature": {
-            "r": "bf6499a085c9d7abf2d150d0228c24d0bd91e7016ae3313140ed9c677d52aa7",
-            "s": "6ee5a7a60d675ee6b2e09edf2b25829023c8c0ff46c2c17e2f6e4ed1bca470f7",
-            "recoveryParam": 1
-          }
-        }
-      },
-      {
-        "id": "d6f0d918ba214ab9b2fe9536bf6bb5ef",
-        "outputMap": {
-          "din-miner-adress-här": 50
-        },
-        "inputMap": {
-          "timestamp": 1723806399388,
-          "amount": 50,
-          "address": "*authorized-reward*",
-          "signature": null
-        }
-      }
-    ],
-    "nonce": 14,
     "difficulty": 3
   }
 ]

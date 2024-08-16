@@ -51,18 +51,34 @@ export default class Blockchain {
     }
 
     loadBlockchain() {
-        if (fs.existsSync(BLOCKCHAIN_FILE)) {
-            const fileData = fs.readFileSync(BLOCKCHAIN_FILE, 'utf8');
-            const savedChain = JSON.parse(fileData);
-
-            if (Blockchain.isValidChain(savedChain)) {
-                this.chain = savedChain;
-                console.log('Blockchain loaded from file.');
-            } else {
-                console.error('Failed to load blockchain. The file contains an invalid chain.');
+        try {
+            if (fs.existsSync(BLOCKCHAIN_FILE)) {
+                const fileData = fs.readFileSync(BLOCKCHAIN_FILE, 'utf8');
+                const savedChain = JSON.parse(fileData);
+    
+                if (Blockchain.isValidChain(savedChain)) {
+                    this.chain = savedChain;
+                    console.log('Blockchain loaded from file.');
+                } else {
+                    console.error('Invalid blockchain in file, using default genesis block.');
+                }
             }
+        } catch (error) {
+            console.error("Error reading JSON file:", error);
+            throw error; 
         }
     }
+    
+    saveBlockchain() {
+        try {
+            fs.writeFileSync(BLOCKCHAIN_FILE, JSON.stringify(this.chain, null, 2));
+            console.log('Blockchain saved to file.');
+        } catch (error) {
+            console.error("Error writing JSON file:", error);
+        }
+    }
+    
+    
 
     replaceChain(newChain) {
         console.log('Current chain length:', this.chain.length);
