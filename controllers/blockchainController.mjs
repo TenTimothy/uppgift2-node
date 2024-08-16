@@ -1,5 +1,5 @@
 import Blockchain from '../models/Blockchain.mjs'; 
-import { pubNubServer, blockchain } from "../server.mjs";
+import { pubNubServer, blockchain, transactionPool } from "../server.mjs"; 
 
 
 export const getBlockchain = (req, res, next) => {
@@ -12,7 +12,7 @@ export const getBlockchain = (req, res, next) => {
     } catch (error) {
         return next(error);
     }
-};;
+};
 
 export const getBlockByIndex = (req, res, next) => {
     const { index } = req.params;
@@ -44,11 +44,26 @@ export const validateBlockchain = (req, res, next) => {
 };
 
 export const mineBlock = (req, res, next) => {
-    const data = req.body;
+    try {
+        const { minerAddress } = req.body;
+        if (!minerAddress) {
+            return res.status(400).json({ success: false, message: 'Miner address is required' });
+        }
 
-    const block = blockchain.addBlock({ data: data});
+        console.log('Transaction Pool before mining:', transactionPool.transactions);
 
-    pubNubServer.broadcast();
+        const block = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
 
-    res.status(201).json({ success: true, satusCode: 201, data: block });
+        pubNubServer.broadcast();
+
+        res.status(201).json({ success: true, satusCode: 201, data: block });
+    } catch (error) {
+        console.error('Error in mineBlock:', error.message);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 };
+
+
+
+
+

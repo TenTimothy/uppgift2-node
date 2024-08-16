@@ -39,13 +39,26 @@ export default class Transaction {
     createOutputMap({ sender, recipient, amount }) {
         const outputMap = {};
 
-        outputMap[recipient] = amount;
-        outputMap[sender.publicKey] = sender.balance - amount;
+        if (sender.address === REWARD_INPUT.address) {
+            outputMap[recipient] = amount;
+        } else {
+            outputMap[recipient] = amount;
+            outputMap[sender.publicKey] = sender.balance - amount;
+        }
 
         return outputMap;
     }
 
     createInputMap({ sender, outputMap }) {
+        if (sender.address === REWARD_INPUT.address) {
+            return {
+                timestamp: Date.now(),
+                amount: MINING_REWARD,
+                address: REWARD_INPUT.address,
+                signature: null
+            };
+        }
+
         return {
             timestamp: Date.now(),
             amount: sender.balance,

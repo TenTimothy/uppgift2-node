@@ -1,5 +1,3 @@
-import Transaction from './Transaction.mjs';
-
 export default class TransactionPool {
     constructor() {
         this.transactions = [];
@@ -7,18 +5,22 @@ export default class TransactionPool {
 
     addOrUpdateTransaction(transaction) {
         const transactionIndex = this.transactions.findIndex(t => t.id === transaction.id);
-
+    
         if (transactionIndex >= 0) {
-            this.transactions[transactionIndex] = transaction; // Uppdatera befintlig transaktion
+            this.transactions[transactionIndex] = transaction;
         } else {
-            this.transactions.push(transaction); // Lägg till ny transaktion om den inte finns
+            this.transactions.push(transaction);
         }
+    
+        console.log('Transaction Pool after adding:', this.transactions);
     }
 
+    // Hitta en transaktion baserat på ID
     findTransactionById(id) {
         return this.transactions.find(t => t.id === id);
     }
 
+    // Töm transaktionspoolen
     clear() {
         this.transactions = [];
     }

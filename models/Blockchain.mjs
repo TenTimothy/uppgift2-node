@@ -1,10 +1,9 @@
-import Block from './Block.mjs';
+import Block from './Block.mjs'; 
 import Transaction from './Transaction.mjs';
 
 export default class Blockchain {
     constructor() {
         this.chain = [Block.genesis()];
-        this.transactionPool = [];
     }
 
     getChain() {
@@ -18,20 +17,21 @@ export default class Blockchain {
         return newBlock;
     }
 
-    addTransaction(transaction) {
-        if (Transaction.validate(transaction)) {
-            this.transactionPool.push(transaction);
-        } else {
-            throw new Error('Invalid transaction');
+    minePendingTransactions(minerAddress, transactionPool) {
+        if (!minerAddress) {
+            throw new Error('Miner address is required');
         }
-    }
 
-    minePendingTransactions(minerAddress) {
-        const rewardTransaction = Transaction.createRewardTransaction(minerAddress);
-        this.transactionPool.push(rewardTransaction);
+        if (!Array.isArray(transactionPool)) {
+            throw new Error('Transaction pool must be an array');
+        }
 
-        const block = this.addBlock({ data: this.transactionPool });
-        this.transactionPool = [];
+        const rewardTransaction = Transaction.createRewardTransaction({ minerWallet: { publicKey: minerAddress } });
+
+        transactionPool.push(rewardTransaction);
+
+        const block = this.addBlock({ data: [...transactionPool] });
+        transactionPool.length = 0; // Töm transaktionspoolen
         return block;
     }
 

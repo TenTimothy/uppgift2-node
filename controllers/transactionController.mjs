@@ -10,10 +10,11 @@ export const createTransaction = (req, res, next) => {
         transactionPool.addOrUpdateTransaction(transaction);
 
         console.log('New Transaction:', transaction);
-        console.log('Current Transaction Pool:', transactionPool);
+        console.log('Current Transaction Pool:', transactionPool.transactions);
 
         res.status(201).json({ success: true, data: transaction });
     } catch (error) {
         next(error);
     }
 };
+
