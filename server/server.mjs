@@ -43,11 +43,16 @@ const synchronize = async () => {
     if (response.ok) {
         const result = await response.json();
         console.log('SYNC', result.data);
-        blockchain.replaceChain(result.data);
+
+        if (result.data.length > blockchain.getChain().length) {
+            blockchain.replaceChain(result.data);
+        } else {
+            console.log('The local chain is already longer or equal; no replacement needed.');
+        }
     }
 };
 
-// Lägg till denna funktion för att synkronisera transaktionspoolen
+
 const synchronizeTransactionPool = async () => {
     const response = await fetch(`${ROOT_NODE}/api/v1/transaction-pool`);
     if (response.ok) {
@@ -69,6 +74,6 @@ app.listen(PORT, () => {
 
     if (PORT !== DEFAULT_PORT) {
         synchronize();
-        synchronizeTransactionPool(); // Synkronisera även transaktionspoolen
+        synchronizeTransactionPool(); 
     }
 });
