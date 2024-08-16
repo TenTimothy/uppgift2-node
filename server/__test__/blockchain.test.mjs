@@ -6,10 +6,11 @@ describe('Blockchain', () => {
     let blockchain;
 
     beforeEach(() => {
-        blockchain = new Blockchain();
+        blockchain = new Blockchain('./data/test-blockchain.json');
     });
 
     it('should start with the genesis block', () => {
+        expect(blockchain.getChain().length).toBe(1);
         expect(blockchain.getChain()[0]).toEqual(Block.genesis());
     });
 
@@ -21,22 +22,18 @@ describe('Blockchain', () => {
     });
 
     it('should validate a valid chain', () => {
-        const blockchain2 = new Blockchain();
-        blockchain2.addBlock({ data: 'test' });
-
-        expect(Blockchain.isValidChain(blockchain2.getChain())).toBe(true);
+        blockchain.addBlock({ data: 'test-data' });
+        expect(Blockchain.isValidChain(blockchain.getChain())).toBe(true);
     });
 
     it('should invalidate a chain with a corrupt genesis block', () => {
         blockchain.getChain()[0].data = 'Bad data';
-
         expect(Blockchain.isValidChain(blockchain.getChain())).toBe(false);
     });
 
     it('should invalidate a corrupt chain', () => {
         blockchain.addBlock({ data: 'test' });
         blockchain.getChain()[1].data = 'Bad data';
-
         expect(Blockchain.isValidChain(blockchain.getChain())).toBe(false);
     });
 });

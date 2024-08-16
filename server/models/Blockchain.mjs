@@ -4,10 +4,10 @@ import Block from './Block.mjs';
 import Transaction from './Transaction.mjs';
 
 const DATA_DIR = './data'; 
-const BLOCKCHAIN_FILE = path.join(DATA_DIR, 'blockchain.json');
 
 export default class Blockchain {
-    constructor() {
+    constructor(blockchainFile = path.join(DATA_DIR, 'blockchain.json')) {
+        this.blockchainFile = blockchainFile;
         this.chain = [Block.genesis()];
         this.loadBlockchain(); 
     }
@@ -43,17 +43,22 @@ export default class Blockchain {
     }
 
     saveBlockchain() {
-        if (!fs.existsSync(DATA_DIR)) {
-            fs.mkdirSync(DATA_DIR);
-        }
+        try {
+            if (!fs.existsSync(DATA_DIR)) {
+                fs.mkdirSync(DATA_DIR);
+            }
 
-        fs.writeFileSync(BLOCKCHAIN_FILE, JSON.stringify(this.chain, null, 2));
+            fs.writeFileSync(this.blockchainFile, JSON.stringify(this.chain, null, 2));
+            console.log('Blockchain saved to file.');
+        } catch (error) {
+            console.error("Error writing JSON file:", error);
+        }
     }
 
     loadBlockchain() {
         try {
-            if (fs.existsSync(BLOCKCHAIN_FILE)) {
-                const fileData = fs.readFileSync(BLOCKCHAIN_FILE, 'utf8');
+            if (fs.existsSync(this.blockchainFile)) {
+                const fileData = fs.readFileSync(this.blockchainFile, 'utf8');
                 const savedChain = JSON.parse(fileData);
     
                 if (Blockchain.isValidChain(savedChain)) {
@@ -68,17 +73,6 @@ export default class Blockchain {
             throw error; 
         }
     }
-    
-    saveBlockchain() {
-        try {
-            fs.writeFileSync(BLOCKCHAIN_FILE, JSON.stringify(this.chain, null, 2));
-            console.log('Blockchain saved to file.');
-        } catch (error) {
-            console.error("Error writing JSON file:", error);
-        }
-    }
-    
-    
 
     replaceChain(newChain) {
         console.log('Current chain length:', this.chain.length);
@@ -97,7 +91,6 @@ export default class Blockchain {
         this.chain = newChain;
         this.saveBlockchain(); 
     }
-    
 
     static isValidChain(chain) {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) return false;
