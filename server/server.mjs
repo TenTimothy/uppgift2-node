@@ -47,6 +47,16 @@ const synchronize = async () => {
     }
 };
 
+// Lägg till denna funktion för att synkronisera transaktionspoolen
+const synchronizeTransactionPool = async () => {
+    const response = await fetch(`${ROOT_NODE}/api/v1/transaction-pool`);
+    if (response.ok) {
+        const result = await response.json();
+        console.log('SYNC Transaction Pool', result.data);
+        transactionPool.setTransactions(result.data);
+    }
+};
+
 if (process.env.GENERATE_NODE_PORT === 'true') {
   //NODE_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
   NODE_PORT = 3002;
@@ -59,5 +69,6 @@ app.listen(PORT, () => {
 
     if (PORT !== DEFAULT_PORT) {
         synchronize();
+        synchronizeTransactionPool(); // Synkronisera även transaktionspoolen
     }
 });

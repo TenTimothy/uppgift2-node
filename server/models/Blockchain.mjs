@@ -36,16 +36,23 @@ export default class Blockchain {
     }
 
     replaceChain(newChain) {
-        if (newChain.length <= this.chain.length) {
+        console.log(`Current chain length: ${this.chain.length}`);
+        console.log(`New chain length: ${newChain.length}`);
+    
+        // Lägger till en kontroll om längderna är samma men innehållet skiljer sig
+        if (newChain.length < this.chain.length) {
             throw new Error('The incoming chain must be longer');
         }
-
+    
         if (!Blockchain.isValidChain(newChain)) {
             throw new Error('The incoming chain is invalid');
         }
-
+    
+        console.log('Replacing the current chain with the new chain.');
         this.chain = newChain;
     }
+    
+    
 
     static isValidChain(chain) {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) return false;
