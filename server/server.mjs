@@ -47,6 +47,11 @@ const synchronize = async () => {
     }
 };
 
+if (process.env.GENERATE_NODE_PORT === 'true') {
+  //NODE_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
+  NODE_PORT = 3002;
+}
+
 const PORT = NODE_PORT || DEFAULT_PORT;
 
 app.listen(PORT, () => {
