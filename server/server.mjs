@@ -1,5 +1,6 @@
 import express from 'express'; 
 import dotenv from 'dotenv';
+import { connectDb } from './config/mongo.mjs';
 import colors from 'colors';
 import morgan from 'morgan';
 import PubNubServerClass from './pubNubServer.mjs'; 
@@ -10,6 +11,8 @@ import Blockchain from './models/Blockchain.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
 
 dotenv.config({ path: './config/config.env' });
+
+connectDb();
 
 const credentials = {
     publishKey: process.env.PUBLISH_KEY,
