@@ -1,34 +1,57 @@
 import User from '../models/UserModel.mjs';
+import ErrorResponse from '../utils/ErrorResponse.mjs';
+
+
+
+// @dec Registrera en användare
+// @route POST /api/v1/auth/register
+// @access PUBLIC
 
 export const register = async (req, res, next) => {
-    const { name, email, password, role} = req.body;
+    try {
+        const { name, email, password, role } = req.body;
 
-    const user = await User.create({ name, email, password, role});
+        const user = await User.create({ name, email, password, role });
 
-    createAndSendToken(user, 201, res)
+        createAndSendToken(user, 201, res); // Skicka in user-objektet här
+    } catch (error) {
+        if (error.code === 11000) { // Hantera duplikatnyckelfel
+            return next(new ErrorResponse('E-postadressen är redan registrerad', 400));
+        } else {
+            return next(error);
+        }
+    }
 };
+
+
+// @dec Logga in en användare
+// @route POST /api/v1/auth/login
+// @access PUBLIC
 
 export const login = async (req, res, next) => {
     const { email, password } = req.body;
 
-    if(!email || !password) {
-        return next ('E-post och/eller lössenord saknas', 400)
+    if (!email || !password) {
+        return next(new ErrorResponse('E-post och/eller lösenord saknas', 400));
     }
 
-    const user = await User.findOne({email}).select('+password');
+    const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-        return next(new ErroorResponse('Felaktig inloggning', 401))
+        return next(new ErrorResponse('Felaktig inloggning', 401));
     }
 
     const isCorrect = await user.validatePassword(password);
 
     if (!isCorrect) {
-        return next(new ErroorResponse('Felaktig inloggning', 401))
+        return next(new ErrorResponse('Felaktig inloggning', 401));
     }
-
-    createAndSendToken(user, 200, res);
 };
+
+// @dec Returnera information om en inloggad användare
+// @route POST /api/v1/auth/me
+// @access PUBLIC
+
 
 export const getMe = async (req, res, next) => {
     res.status(200).json({
@@ -46,8 +69,13 @@ export const resetPassword = async (req, res, next) => {
     });
 };
 
-const createAndSendToken = (id, statusCode, res) => {
-    const token = user.generateToken()
+const createAndSendToken = (user, statusCode, res) => {
+    const token = user.generateToken(); // Använd rätt variabel 'user'
 
-    res.status(statusCode).json({success:true, statusCode, token });
+    res.status(statusCode).json({
+        success: true,
+        statusCode,
+        token
+    });
 };
+

@@ -1,5 +1,6 @@
 import express from 'express'; 
 import dotenv from 'dotenv';
+import authRouter from './routes/authRoute.mjs';
 import { connectDb } from './config/mongo.mjs';
 import colors from 'colors';
 import morgan from 'morgan';
@@ -29,6 +30,7 @@ export { pubNubServer, blockchain, transactionPool };
 
 const app = express();
 app.use(express.json());
+app.use('/api/v1/auth', authRouter);
 
 const DEFAULT_PORT = 3001;
 const ROOT_NODE = `http://localhost:${DEFAULT_PORT}`;
@@ -86,6 +88,6 @@ app.listen(PORT, () => {
 
 //Hantera fel(Rejections) som inte hanteras någon annanstans i applikationen...
 process.on('unhandledRejection', (err, promise) => {
-    console.log(`FEL: ${err.message}`, red);
+    console.log(`FEL: ${err.message}`);
     server.close(() => process.exit(1));
 });

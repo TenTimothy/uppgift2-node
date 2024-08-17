@@ -46,7 +46,7 @@
  };
 
  userSchema.methods.generateToken = function () {
-    return jwt.sign({ id: this_id }, process.env.JWT_SECRET,{
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET,{
         expiresIn: process.env.JWT_TTL,
     });
  };
