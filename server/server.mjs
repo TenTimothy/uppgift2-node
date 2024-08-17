@@ -1,5 +1,7 @@
 import express from 'express'; 
 import dotenv from 'dotenv';
+import colors from 'colors';
+import morgan from 'morgan';
 import PubNubServerClass from './pubNubServer.mjs'; 
 import blockchainRouter from './routes/blockchainRoute.mjs'; 
 import transactionRoute from './routes/transactionRoute.mjs'; 
@@ -34,6 +36,7 @@ setTimeout(() => {
     pubNubServer.broadcast();
 }, 1000);
 
+app.use(morgan('dev'));
 app.use('/api/v1/blockchain', blockchainRouter);
 app.use('/api/v1/transactions', transactionRoute); 
 app.use('/api/v1/transaction-pool', transactionPoolRoute);
@@ -70,7 +73,7 @@ if (process.env.GENERATE_NODE_PORT === 'true') {
 const PORT = NODE_PORT || DEFAULT_PORT;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
+    console.log(`Server is running on port: ${PORT}`.bgYellow);
 
     if (PORT !== DEFAULT_PORT) {
         synchronize();
