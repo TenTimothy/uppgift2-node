@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import User from '../models/UserModel.mjs';
 import ErrorResponse from '../utils/ErrorResponse.mjs';
 import asyncHandler from '../middlewares/asyncHandler.mjs';
@@ -37,15 +38,14 @@ export const login = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('Felaktig inloggning', 401));
     }
 
+    // Skapa och skicka token (denna metod behöver finnas i authController)
     createAndSendToken(user, 200, res);
 });
 
 // @desc Returnera information om en inloggad användare
-// @route POST /api/v1/auth/me
-// @access PUBLIC
-
+// @route GET /api/v1/auth/me
+// @access PRIVATE
 export const getMe = asyncHandler(async (req, res, next) => {
-    // Hämta den inloggade användaren baserat på ID som kommer från JWT
     const user = await User.findById(req.user.id);
 
     res.status(200).json({
@@ -55,16 +55,59 @@ export const getMe = asyncHandler(async (req, res, next) => {
     });
 });
 
+// @desc Glömt lösenord
+// @route POST /api/v1/auth/forgotpassword
+// @access PUBLIC
+export const forgotPassword = asyncHandler(async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+        return next(new ErrorResponse('Användare med den e-postadressen finns inte', 404));
+    }
+
+    // Generera och spara token
+    const resetToken = user.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+
+    // Skapa återställnings-URL
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
+
+    // Skicka e-post (anpassa denna del efter ditt e-posthanteringssystem)
+    const message = `Du har begärt en återställning av ditt lösenord. Vänligen gör en PUT-begäran till: \n\n ${resetUrl}`;
+
+    try {
+        // Här skulle du skicka e-post med återställningslänken
+        res.status(200).json({ success: true, statusCode: 200, data: 'Återställningslänk skickad till e-post' });
+    } catch (err) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordTokenExpire = undefined;
+        await user.save({ validateBeforeSave: false });
+
+        return next(new ErrorResponse('E-post kunde inte skickas', 500));
+    }
+});
 
 // @desc Återställ lösenord
-// @route POST /api/v1/auth/resetpassword
+// @route PUT /api/v1/auth/resetpassword/:token
 // @access PUBLIC
 export const resetPassword = asyncHandler(async (req, res, next) => {
-    res.status(200).json({
-        success: true,
-        statusCode: 200,
-        data: 'Återställning av lösenord fungerar',
+    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordTokenExpire: { $gt: Date.now() },
     });
+
+    if (!user) {
+        return next(new ErrorResponse('Ogiltig eller utgången token', 400));
+    }
+
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordTokenExpire = undefined;
+    await user.save();
+
+    createAndSendToken(user, 200, res);
 });
 
 const createAndSendToken = (user, statusCode, res) => {
@@ -82,6 +125,6 @@ const createAndSendToken = (user, statusCode, res) => {
         success: true,
         statusCode,
         token,
-        user: userData  // Lägg till användardata i svaret
+        user: userData  
     });
 };
