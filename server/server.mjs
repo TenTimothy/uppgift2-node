@@ -83,3 +83,9 @@ app.listen(PORT, () => {
         synchronizeTransactionPool(); 
     }
 });
+
+//Hantera fel(Rejections) som inte hanteras någon annanstans i applikationen...
+process.on('unhandledRejection', (err, promise) => {
+    console.log(`FEL: ${err.message}`, red);
+    server.close(() => process.exit(1));
+});
