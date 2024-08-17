@@ -43,12 +43,18 @@ export const login = asyncHandler(async (req, res, next) => {
 // @desc Returnera information om en inloggad användare
 // @route POST /api/v1/auth/me
 // @access PUBLIC
+
 export const getMe = asyncHandler(async (req, res, next) => {
+    // Hämta den inloggade användaren baserat på ID som kommer från JWT
+    const user = await User.findById(req.user.id);
+
     res.status(200).json({
         success: true,
         statusCode: 200,
+        data: user,
     });
 });
+
 
 // @desc Återställ lösenord
 // @route POST /api/v1/auth/resetpassword
