@@ -13,7 +13,7 @@ export const register = async (req, res, next) => {
 
         const user = await User.create({ name, email, password, role });
 
-        createAndSendToken(user, 201, res); // Skicka in user-objektet här
+        createAndSendToken(user, 201, res);
     } catch (error) {
         if (error.code === 11000) { // Hantera duplikatnyckelfel
             return next(new ErrorResponse('E-postadressen är redan registrerad', 400));
@@ -22,6 +22,8 @@ export const register = async (req, res, next) => {
         }
     }
 };
+
+
 
 
 // @dec Logga in en användare
@@ -70,12 +72,22 @@ export const resetPassword = async (req, res, next) => {
 };
 
 const createAndSendToken = (user, statusCode, res) => {
-    const token = user.generateToken(); // Använd rätt variabel 'user'
+    const token = user.generateToken();
+
+    // Exkludera lösenordet från det data som skickas tillbaka
+    const userData = {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        createdAt: user.createdAt
+    };
 
     res.status(statusCode).json({
         success: true,
         statusCode,
-        token
+        token,
+        user: userData  // Lägg till användardata i svaret
     });
 };
 

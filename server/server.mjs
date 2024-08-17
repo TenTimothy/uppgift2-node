@@ -11,9 +11,16 @@ import transactionPoolRoute from './routes/transactionPoolRoute.mjs';
 import Blockchain from './models/Blockchain.mjs'; 
 import TransactionPool from './models/TransactionPool.mjs';
 
+//import path from 'path';
+//import { fileURLTOPath } from 'url';
+
 dotenv.config({ path: './config/config.env' });
 
 connectDb();
+
+//const fileName = fileURLToPath(import.meta.url);
+//const dirname = path.dirname(fileName);
+//global.__appdir = dirname;
 
 const credentials = {
     publishKey: process.env.PUBLISH_KEY,
