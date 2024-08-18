@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Block from './Block.mjs'; 
-import Transaction from './Transaction.mjs'; // Din lokala Transaction-klass
-import BlockchainModel from './BlockchainDBModel.mjs';
-import BlockModel from './BlockDBModel.mjs';
+import Transaction from './Transaction.mjs'; 
 import TransactionModel from './TransactionDB.Model.mjs'
 
 export default class Blockchain {
@@ -13,7 +11,7 @@ export default class Blockchain {
     }
 
     getChain() {
-        return this.chain;
+        return this.chain;ß
     }
 
     async addBlock({ data }) {
