@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "inlamningsupgift 2",
   "main": "server.mjs",
+  "type": "module",
   "directories": {
     "test": "test"
   },

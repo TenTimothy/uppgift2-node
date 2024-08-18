@@ -7,7 +7,7 @@ const BlockSchema = new mongoose.Schema({
     data: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Transaction' // Referens till Transaction-modellen
+            ref: 'Transaction' 
         }
     ],
     nonce: Number,

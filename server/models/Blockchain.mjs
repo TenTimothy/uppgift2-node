@@ -58,7 +58,7 @@ export default class Blockchain {
     
             console.log('Saving block document:', blockDocument);
             const blockchainDocument = await BlockchainModel.findOne();
-            
+    
             if (blockchainDocument) {
                 blockchainDocument.chain.push(blockDocument._id);
                 await blockchainDocument.save();
@@ -71,6 +71,7 @@ export default class Blockchain {
             console.error("Error saving block:", error);
         }
     }
+    
 
     async loadBlockchain() {
         try {
@@ -85,24 +86,7 @@ export default class Blockchain {
             console.error("Error loading blockchain from database:", error);
         }
     }
-
-    async replaceChain(newChain) {
-        console.log('Current chain length:', this.chain.length);
-        console.log('New chain length:', newChain.length);
-
-        if (newChain.length <= this.chain.length) {
-            console.error('The incoming chain must be longer');
-            return;
-        }
-
-        if (!Blockchain.isValidChain(newChain)) {
-            throw new Error('The incoming chain is invalid');
-        }
-
-        console.log('Replacing the current chain with the new chain.');
-        this.chain = newChain;
-        await this.saveChainToDatabase(); 
-    }
+    
 
     static isValidChain(chain) {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) return false;

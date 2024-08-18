@@ -6,7 +6,7 @@ describe('Blockchain', () => {
     let blockchain;
 
     beforeEach(() => {
-        blockchain = new Blockchain('./data/test-blockchain.json');
+        blockchain = new Blockchain();
     });
 
     it('should start with the genesis block', () => {

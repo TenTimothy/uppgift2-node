@@ -117,6 +117,6 @@ describe('Transaction', () => {
                 expect(transaction.outputMap[nextRecipient]).toEqual(nextAmount);
             });
 
-        })
-    })
+        });
+    });
 });
