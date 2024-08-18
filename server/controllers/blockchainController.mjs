@@ -1,69 +1,69 @@
-import Blockchain from '../models/Blockchain.mjs'; 
+import asyncHandler from '../middlewares/asyncHandler.mjs';
+import ErrorResponse from '../utils/ErrorResponse.mjs';
+import Blockchain from '../models/Blockchain.mjs';
 import { pubNubServer, blockchain, transactionPool } from "../server.mjs"; 
 
+// @desc Hämta hela blockkedjan
+// @route GET /api/v1/blockchain
+// @access PUBLIC
+export const getBlockchain = asyncHandler(async (req, res, next) => {
+    res.status(200).json({
+        success: true,
+        data: blockchain.getChain()  
+    });
+});
 
-export const getBlockchain = (req, res, next) => {
-    console.log('Handling GET /api/v1/blockchain');
-    try {
-        res.status(200).json({
-            success: true,
-            data: blockchain.getChain()  
-        });
-    } catch (error) {
-        return next(error);
+// @desc Mine ett nytt block
+// @route POST /api/v1/blockchain/mine
+// @access PRIVATE
+export const mineBlock = asyncHandler(async (req, res, next) => {
+    const { minerAddress } = req.body;
+
+    if (!minerAddress) {
+        return next(new ErrorResponse('Miner address is required', 400));
     }
-};
 
-export const getBlockByIndex = (req, res, next) => {
+    const block = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
+
+    pubNubServer.broadcast();
+
+    res.status(201).json({ 
+        success: true, 
+        statusCode: 201, 
+        data: block 
+    });
+});
+
+// @desc Hämta ett specifikt block baserat på index
+// @route GET /api/v1/blockchain/:index
+// @access PUBLIC
+export const getBlockByIndex = asyncHandler(async (req, res, next) => {
     const { index } = req.params;
     const blockIndex = parseInt(index, 10);
 
     if (isNaN(blockIndex) || blockIndex < 0 || blockIndex >= blockchain.getChain().length) {
-        return res.status(400).json({ success: false, message: 'Invalid block index' });
+        return next(new ErrorResponse('Invalid block index', 400));
     }
 
     const block = blockchain.getChain()[blockIndex];
-    res.status(200).json({ success: true, data: block });
-};
+    res.status(200).json({ 
+        success: true, 
+        data: block 
+    });
+});
 
-export const validateBlockchain = (req, res, next) => {
+// @desc Validera hela blockkedjan
+// @route GET /api/v1/blockchain/validate
+// @access PUBLIC
+export const validateBlockchain = asyncHandler(async (req, res, next) => {
     try {
-        console.log("Starting blockchain validation...");
         const chain = blockchain.getChain();
         const isValid = Blockchain.isValidChain(chain);
-        console.log("Blockchain validation result:", isValid);
-        res.status(200).json({ success: true, valid: isValid });
+        res.status(200).json({ 
+            success: true, 
+            valid: isValid 
+        });
     } catch (error) {
-        console.error("Error during blockchain validation:", error.message);
-        if (typeof next === 'function') {
-            next(error);
-        } else {
-            res.status(500).json({ success: false, message: "Server error" });
-        }
+        return next(new ErrorResponse("Server error during blockchain validation", 500));
     }
-};
-
-export const mineBlock = (req, res, next) => {
-    try {
-        const { minerAddress } = req.body;
-        if (!minerAddress) {
-            return res.status(400).json({ success: false, message: 'Miner address is required' });
-        }
-
-        console.log('Transaction Pool before mining:', transactionPool.transactions);
-
-        const block = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
-
-        pubNubServer.broadcast();
-
-        res.status(201).json({ success: true, satusCode: 201, data: block });
-    } catch (error) {
-        console.error('Error in mineBlock:', error.message);
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
-};
-
-
-
-
-
+});

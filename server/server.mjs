@@ -10,7 +10,7 @@ import transactionRoute from './routes/transactionRoute.mjs';
 import transactionPoolRoute from './routes/transactionPoolRoute.mjs'; 
 import Blockchain from './models/Blockchain.mjs'; 
 import TransactionPool from './models/TransactionPool.mjs';
-import { errorHandler } from './middlewares/errorHandler.mjs';  // Importera errorHandler
+import { errorHandler } from './middlewares/errorHandler.mjs'; 
 
 //import path from 'path';
 //import { fileURLTOPath } from 'url';
@@ -47,7 +47,6 @@ app.use('/api/v1/blockchain', blockchainRouter);
 app.use('/api/v1/transactions', transactionRoute); 
 app.use('/api/v1/transaction-pool', transactionPoolRoute);
 
-// Lägg till errorHandler som sista middleware
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
@@ -56,7 +55,6 @@ const server = app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`.bgYellow);
 });
 
-// Hantera fel (Rejections) som inte hanteras någon annanstans i applikationen...
 process.on('unhandledRejection', (err, promise) => {
     console.log(`FEL: ${err.message}`);
     server.close(() => process.exit(1));

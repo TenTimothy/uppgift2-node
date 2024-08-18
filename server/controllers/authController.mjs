@@ -38,7 +38,6 @@ export const login = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('Felaktig inloggning', 401));
     }
 
-    // Skapa och skicka token (denna metod behöver finnas i authController)
     createAndSendToken(user, 200, res);
 });
 
@@ -65,18 +64,14 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('Användare med den e-postadressen finns inte', 404));
     }
 
-    // Generera och spara token
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    // Skapa återställnings-URL
     const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
 
-    // Skicka e-post (anpassa denna del efter ditt e-posthanteringssystem)
     const message = `Du har begärt en återställning av ditt lösenord. Vänligen gör en PUT-begäran till: \n\n ${resetUrl}`;
 
     try {
-        // Här skulle du skicka e-post med återställningslänken
         res.status(200).json({ success: true, statusCode: 200, data: 'Återställningslänk skickad till e-post' });
     } catch (err) {
         user.resetPasswordToken = undefined;

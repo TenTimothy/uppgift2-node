@@ -1,4 +1,4 @@
-import { transactionPool } from '../server.mjs'; // Säkerställ att detta är samma instans
+import { transactionPool } from '../server.mjs'; 
 
 export const getTransactionPool = (req, res, next) => {
     try {
