@@ -24,5 +24,5 @@ const TransactionSchema = new mongoose.Schema({
     }
 });
 
-// Specifik collection-namn
+
 export default mongoose.model('Transaction', TransactionSchema, 'blockchain-transactions');

@@ -1,14 +1,37 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LogoutButton from '../components/LogoutButton';
 import GoBackButton from '../components/GoBackButton';
 
 const SendTransactionPage = () => {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
+  const navigate = useNavigate(); // Hook för att navigera mellan sidor
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Transaction sent:', { recipient, amount });
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/transactions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          recipient,
+          amount,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        console.log('Transaction sent successfully:', data.data);
+        navigate('/transaction-pool'); // Navigera till TransactionPoolPage efter att transaktionen har skickats
+      } else {
+        console.error('Error sending transaction:', data.error);
+      }
+    } catch (error) {
+      console.error('An unexpected error occurred:', error);
+    }
   };
 
   return (
@@ -37,8 +60,8 @@ const SendTransactionPage = () => {
         </div>
         <button type="submit" style={buttonStyle}>Send</button>
       </form>
-      <LogoutButton /> 
-      <GoBackButton /> 
+      <LogoutButton />
+      <GoBackButton />
     </div>
   );
 };

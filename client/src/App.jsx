@@ -4,6 +4,7 @@ import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import SendTransactionPage from './pages/SendTransactionPage';
 import TransactionHistoryPage from './pages/TransactionHistoryPage';
+import TransactionPoolPage from './pages/TransactionPoolPage';
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/send-transaction" element={<SendTransactionPage />} />
         <Route path="/transaction-history" element={<TransactionHistoryPage />} />
-        <Route path="/" element={<Navigate to="/auth" />} /> {/* Om någon går till "/" omdirigeras de till "/auth" */}
+        <Route path="/transaction-pool" element={<TransactionPoolPage />} />
+        <Route path="/" element={<Navigate to="/auth" />} />
       </Routes>
     </Router>
   );

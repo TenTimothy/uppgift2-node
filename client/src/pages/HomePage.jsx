@@ -9,8 +9,9 @@ const HomePage = () => {
       <nav style={{ marginTop: '20px' }}>
         <Link to="/send-transaction" style={linkStyle}>Send Transaction</Link>
         <Link to="/transaction-history" style={linkStyle}>Transaction History</Link>
+        <Link to="/transaction-pool" style={linkStyle}>Transaction Pool</Link> {/* Länk till transaktionspoolen */}
       </nav>
-      <LogoutButton /> 
+      <LogoutButton />
     </div>
   );
 };
