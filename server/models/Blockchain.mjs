@@ -3,6 +3,8 @@ import path from 'path';
 import Block from './Block.mjs'; 
 import Transaction from './Transaction.mjs'; 
 import TransactionModel from './TransactionDB.Model.mjs'
+import BlockModel from './BlockDBModel.mjs';
+import BlockchainModel from './BlockchainDBModel.mjs';
 
 export default class Blockchain {
     constructor() {
