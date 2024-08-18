@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importera useNavigate för att navigera
 import LogoutButton from '../components/LogoutButton';
 import GoBackButton from '../components/GoBackButton';
 
 const TransactionPoolPage = () => {
   const [transactions, setTransactions] = useState([]);
   const [mining, setMining] = useState(false);
+  const navigate = useNavigate(); // Använd useNavigate för att navigera
 
   useEffect(() => {
-    // Hämta transaktionspoolen från backend
     const fetchTransactionPool = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/transaction-pool');
@@ -37,6 +38,9 @@ const TransactionPoolPage = () => {
       if (data.success) {
         console.log('Block mined successfully:', data.data);
         setTransactions([]); // Töm transaktionspoolen efter mining
+        
+        // Navigera till TransactionHistoryPage med ett framgångsmeddelande
+        navigate('/transaction-history', { state: { successMessage: 'Block mined successfully!' } });
       } else {
         console.error('Error mining block:', data.error);
       }
@@ -52,9 +56,11 @@ const TransactionPoolPage = () => {
       <h2>Transaction Pool</h2>
       {transactions.length > 0 ? (
         <ul>
-          {transactions.map((transaction, index) => (
-            <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
-              <p><strong>To:</strong> {transaction.recipient}</p>
+          {transactions.map((transaction) => (
+            <li key={transaction.id} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+              <p><strong>Transaction ID:</strong> {transaction.id}</p>
+              <p><strong>Sender:</strong> {transaction.sender}</p>
+              <p><strong>Recipient:</strong> {transaction.recipient}</p>
               <p><strong>Amount:</strong> {transaction.amount}</p>
             </li>
           ))}
