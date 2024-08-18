@@ -8,23 +8,33 @@ const TransactionHistoryPage = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const fetchTransactions = async () => {
+    const fetchBlockchain = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/blockchain');
         const data = await response.json();
 
-        console.log('Fetched transactions:', data.transactions);
-        setTransactions(data.transactions || []);
+        console.log('Fetched blockchain:', data.blockchain);
+        
+        // Extrahera alla transaktioner från varje block i blockkedjan
+        const allTransactions = data.blockchain.flatMap(block => 
+          block.data.map(transaction => ({
+            ...transaction,
+            blockHash: block.hash,  // Lägg till blockets hash för att visa detta
+            timestamp: block.timestamp // Lägg till blockets timestamp
+          }))
+        );
+
+        setTransactions(allTransactions);
       } catch (error) {
         console.error('Error fetching transaction history:', error);
       }
     };
 
-    fetchTransactions();
+    fetchBlockchain();
   }, []);
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
       <h2>Transaction History</h2>
       {location.state?.successMessage && (
         <div style={{ padding: '10px', backgroundColor: '#d4edda', color: '#155724', borderRadius: '4px', marginBottom: '20px' }}>
@@ -39,7 +49,9 @@ const TransactionHistoryPage = () => {
               <p><strong>Sender:</strong> {transaction.inputMap?.address || 'N/A'}</p>
               <p><strong>Recipient:</strong> {Object.keys(transaction.outputMap).find(addr => addr !== transaction.inputMap?.address)}</p>
               <p><strong>Amount:</strong> {Object.values(transaction.outputMap).reduce((a, b) => b !== transaction.inputMap?.amount ? b : a, 0)}</p>
-              <p><strong>Date:</strong> {new Date(transaction.inputMap?.timestamp).toLocaleString()}</p>
+              <p><strong>Date:</strong> {new Date(transaction.timestamp).toLocaleString()}</p>
+              <p><strong>Timestamp:</strong> {transaction.timestamp}</p>
+              <p><strong>Block Hash:</strong> {transaction.blockHash}</p>
             </li>
           ))}
         </ul>
