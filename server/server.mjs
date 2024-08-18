@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors'; 
 import authRouter from './routes/authRoute.mjs';
+import walletRouter from './routes/walletRoutes.mjs';
 import { connectDb } from './config/mongo.mjs';
 import colors from 'colors';
 import morgan from 'morgan';
@@ -59,6 +60,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/blockchain', blockchainRouter);
 app.use('/api/v1/transactions', transactionRoute);
 app.use('/api/v1/transaction-pool', transactionPoolRoute);
+app.use('/api/v1/wallet', walletRouter);  
 
 app.use(errorHandler);
 

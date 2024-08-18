@@ -294,5 +294,77 @@
     ],
     "nonce": 7,
     "difficulty": 3
+  },
+  {
+    "timestamp": 1724010241780,
+    "lastHash": "0111c5aa4598e461ddac1547c1338552d0bba984675489e4800afe99ff32db29",
+    "hash": "0fefe3d67c9f84ac716fc7ab2fef53fe081becabd18ed583bc450f0062a2b62e",
+    "data": [
+      {
+        "id": "2a291a2a02df4fb78a09d8797a08a082",
+        "outputMap": {
+          "SARAH": 550,
+          "02c28a38f6e0e114262327d521427265ac8afcb78272575770af7af29767e52afc": 450
+        },
+        "inputMap": {
+          "timestamp": 1724010203271,
+          "amount": 1000,
+          "address": "02c28a38f6e0e114262327d521427265ac8afcb78272575770af7af29767e52afc",
+          "signature": {
+            "r": "679c0ba74530339aa72f998f4429a2d95f69b9a03c79e8cf6ccab45a32c453d3",
+            "s": "db9677cc764167c76ac196b89df9fa290cd7f35d16fa13fb629dd7cfc85cc514",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "d917ee7d56bc4dcdb8e1996ec244265c",
+        "outputMap": {
+          "SARAH": 550,
+          "03c167f53f066eb7716c2f8e53298af42c55bb53d173261459deca7b5b268feae7": 450
+        },
+        "inputMap": {
+          "timestamp": 1724010217117,
+          "amount": 1000,
+          "address": "03c167f53f066eb7716c2f8e53298af42c55bb53d173261459deca7b5b268feae7",
+          "signature": {
+            "r": "8ec775db2fd53af55f93a41cb464896ad12f61a0de32048542dead1b415a0733",
+            "s": "ee76525df5e151549ab35e127a82d5414f5a5bd8db0d6d3fc81f58001b03129b",
+            "recoveryParam": 1
+          }
+        }
+      },
+      {
+        "id": "ea4ac059d0df4c07bcaf359aad85c9d1",
+        "outputMap": {
+          "SARAH": 550,
+          "03a5b79b7dca0d05b2445e50a8acee85b6fc36931ffde8be5ff191e89e8c2387c1": 450
+        },
+        "inputMap": {
+          "timestamp": 1724010218168,
+          "amount": 1000,
+          "address": "03a5b79b7dca0d05b2445e50a8acee85b6fc36931ffde8be5ff191e89e8c2387c1",
+          "signature": {
+            "r": "8cd2e3bb672a622120c364850c99781baf4dd1a32284e0eb35da54336b064e23",
+            "s": "2c9b466f00f79bcf9b537ae0eb9608689e104ebd76e6269455437d8bc44dc6ef",
+            "recoveryParam": 1
+          }
+        }
+      },
+      {
+        "id": "3db6d4036f0f4fafb8a561061e912269",
+        "outputMap": {
+          "din-miner-adress-här": 50
+        },
+        "inputMap": {
+          "timestamp": 1724010241779,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 3,
+    "difficulty": 3
   }
 ]

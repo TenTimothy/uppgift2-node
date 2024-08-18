@@ -14,14 +14,14 @@ export const protect = asyncHandler(async (req, res, next) => {
     }
 
     if (!token) {
-        return next(new ErrorResponse('Behörighet saknas', 401));
+        return next(new ErrorResponse('Unauthorized, access denid', 401));
     }
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decodedToken.id);
 
     if (!req.user) {
-        return next(new ErrorResponse('Behörighet saknas', 401));
+        return next(new ErrorResponse('Authorization is missing', 401));
     }
 
     next();
@@ -31,7 +31,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 export const authorize = (...roles) => {
     return (req, res, next) => {
         if (!roles.includes(req.user.role)) {
-            return next(new ErrorResponse('Åtkomst nekad', 403));
+            return next(new ErrorResponse('Access denied', 403));
         }
         next();
     };
