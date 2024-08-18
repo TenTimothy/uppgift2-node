@@ -13,7 +13,7 @@ const TransactionPoolPage = () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/transaction-pool');
         const data = await response.json();
-        setTransactions(data.data);
+        setTransactions(data.data || []);
       } catch (error) {
         console.error('Error fetching transaction pool:', error);
       }
@@ -59,9 +59,9 @@ const TransactionPoolPage = () => {
           {transactions.map((transaction) => (
             <li key={transaction.id} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
               <p><strong>Transaction ID:</strong> {transaction.id}</p>
-              <p><strong>Sender:</strong> {transaction.sender}</p>
-              <p><strong>Recipient:</strong> {transaction.recipient}</p>
-              <p><strong>Amount:</strong> {transaction.amount}</p>
+              <p><strong>Sender:</strong> {transaction.sender || 'N/A'}</p>
+              <p><strong>Recipient:</strong> {transaction.recipient || 'N/A'}</p>
+              <p><strong>Amount:</strong> {transaction.amount || 'N/A'}</p>
             </li>
           ))}
         </ul>

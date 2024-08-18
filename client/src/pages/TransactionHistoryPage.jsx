@@ -10,10 +10,11 @@ const TransactionHistoryPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/v1/blockchain'); // Hämta transaktioner från blockchain
+        const response = await fetch('http://localhost:3001/api/v1/blockchain');
         const data = await response.json();
-        console.log('Fetched transactions:', data.transactions); // Logga transaktionerna för att se vad som returneras
-        setTransactions(data.transactions); // Spara transaktionerna i state
+
+        console.log('Fetched transactions:', data.transactions);
+        setTransactions(data.transactions || []);
       } catch (error) {
         console.error('Error fetching transaction history:', error);
       }
@@ -36,8 +37,8 @@ const TransactionHistoryPage = () => {
             <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
               <p><strong>Transaction ID:</strong> {transaction.id}</p>
               <p><strong>Sender:</strong> {transaction.inputMap?.address || 'N/A'}</p>
-              <p><strong>Recipient:</strong> {Object.keys(transaction.outputMap).find(addr => addr !== transaction.inputMap.address)}</p>
-              <p><strong>Amount:</strong> {Object.values(transaction.outputMap).reduce((a, b) => b !== transaction.inputMap.amount ? b : a, 0)}</p>
+              <p><strong>Recipient:</strong> {Object.keys(transaction.outputMap).find(addr => addr !== transaction.inputMap?.address)}</p>
+              <p><strong>Amount:</strong> {Object.values(transaction.outputMap).reduce((a, b) => b !== transaction.inputMap?.amount ? b : a, 0)}</p>
               <p><strong>Date:</strong> {new Date(transaction.inputMap?.timestamp).toLocaleString()}</p>
             </li>
           ))}

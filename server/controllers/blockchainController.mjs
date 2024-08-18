@@ -1,51 +1,68 @@
 import asyncHandler from '../middlewares/asyncHandler.mjs';
 import ErrorResponse from '../utils/ErrorResponse.mjs';
 import Blockchain from '../models/Blockchain.mjs';
+import BlockchainDBModel from '../models/BlockchainDBModel.mjs';
 import { pubNubServer, blockchain, transactionPool } from "../server.mjs"; 
 
 // @desc Hämta hela blockkedjan
 // @route GET /api/v1/blockchain
 // @access PUBLIC
 
-export const getBlockchain = async (req, res, next) => {
+export const getBlockchain = (req, res) => {
     try {
-      const blockchain = new Blockchain();
-      const chain = blockchain.getChain();
-      console.log('Blockchain chain:', chain); // Kontrollera vad som finns i kedjan
-  
-      const transactions = chain.flatMap(block => block.data);
-      console.log('Fetched transactions from blockchain:', transactions); // Kontrollera om transaktionerna finns
-  
-      res.status(200).json({
-        success: true,
-        transactions,
-      });
+        const chain = blockchain.getChain(); 
+
+        if (chain.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Blockchain is empty',
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            blockchain: chain, 
+        });
     } catch (error) {
-      next(error);
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while fetching the blockchain',
+            error: error.message,
+        });
     }
-  };
+};
+
   
 
 // @desc Mine ett nytt block
 // @route POST /api/v1/blockchain/mine
 // @access PRIVATE
-export const mineBlock = asyncHandler(async (req, res, next) => {
-    const { minerAddress } = req.body;
+export const mineBlock = (req, res, next) => {
+    try {
+        const { minerAddress } = req.body;
 
-    if (!minerAddress) {
-        return next(new ErrorResponse('Miner address is required', 400));
+        if (!minerAddress) {
+            return res.status(400).json({
+                success: false,
+                message: 'Miner address is required',
+            });
+        }
+
+        
+        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
+
+        res.status(201).json({
+            success: true,
+            data: newBlock,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while mining the block',
+            error: error.message,
+        });
     }
-
-    const block = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
-
-    pubNubServer.broadcast();
-
-    res.status(201).json({ 
-        success: true, 
-        statusCode: 201, 
-        data: block 
-    });
-});
+};
 
 // @desc Hämta ett specifikt block baserat på index
 // @route GET /api/v1/blockchain/:index
@@ -80,3 +97,35 @@ export const validateBlockchain = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse("Server error during blockchain validation", 500));
     }
 });
+
+
+export const saveBlockchain = async (blockchain) => {
+    try {
+        let blockchainDoc = await BlockchainDBModel.findOne({});
+        if (blockchainDoc) {
+            blockchainDoc.blockchain = blockchain;
+        } else {
+            blockchainDoc = new BlockchainDBModel({ blockchain });
+        }
+        await blockchainDoc.save();
+        console.log("Blockchain saved to database.");
+    } catch (err) {
+        console.error("Error saving blockchain to database:", err);
+    }
+};
+
+
+export const loadBlockchain = async () => {
+    try {
+        const blockchainDoc = await BlockchainDBModel.findOne({});
+        if (blockchainDoc) {
+            return blockchainDoc.blockchain;
+        } else {
+            console.log("No blockchain found in the database.");
+            return null;
+        }
+    } catch (err) {
+        console.error("Error loading blockchain from database:", err);
+        return null;
+    }
+};

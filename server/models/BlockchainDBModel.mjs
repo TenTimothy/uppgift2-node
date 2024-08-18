@@ -1,18 +1,24 @@
 import mongoose from 'mongoose';
 
-const BlockchainSchema = new mongoose.Schema({
-    chain: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Block'
-        }
-    ],
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+const transactionSchema = new mongoose.Schema({
+    id: String,
+    outputMap: Object,
+    inputMap: Object,
 });
 
-const BlockchainModel = mongoose.model('Blockchain', BlockchainSchema);
+const blockSchema = new mongoose.Schema({
+    timestamp: Number,
+    lastHash: String,
+    hash: String,
+    data: [transactionSchema],
+    nonce: Number,
+    difficulty: Number,
+});
 
-export default BlockchainModel;
+const blockchainSchema = new mongoose.Schema({
+    blockchain: [blockSchema],
+});
+
+const BlockchainDBModel = mongoose.model('Blockchain', blockchainSchema);
+
+export default BlockchainDBModel;
