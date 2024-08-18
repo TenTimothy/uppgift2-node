@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from './InputField'; // Detta antar att InputField finns i samma katalog
+import InputField from './InputField'; 
 
 const AuthForm = ({ isLogin, name, email, password, setName, setEmail, setPassword, handleSubmit }) => {
   return (

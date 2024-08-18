@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 import ToggleButton from '../components/ToggleButton';
 
@@ -9,13 +10,15 @@ const AuthPage = () => {
   const [name, setName] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Kolla om det finns en token i localStorage vid sidladdning
+  const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
       setIsAuthenticated(true);
+      navigate('/home'); 
     }
-  }, []);
+  }, [navigate]);
 
   const toggleAuthMode = () => {
     setIsLogin((prevMode) => !prevMode);
@@ -41,9 +44,9 @@ const AuthPage = () => {
       const data = await response.json();
   
       if (data.success) {
-        // Spara token i localStorage
         localStorage.setItem('authToken', data.token);
         setIsAuthenticated(true);
+        navigate('/home'); 
         console.log('Login/Register successful', data);
       } else {
         console.error('Error during authentication', data.error);
@@ -52,27 +55,6 @@ const AuthPage = () => {
       console.error('An unexpected error occurred:', error);
     }
   };
-
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
-  };
-
-  if (isAuthenticated) {
-    return (
-      <div style={{ textAlign: 'center', marginTop: '50px' }}>
-        <h2>Welcome Back!</h2>
-        <button onClick={handleLogout} style={{
-          padding: '10px 20px',
-          backgroundColor: '#007BFF',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}>Logout</button>
-      </div>
-    );
-  }
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', border: '1px solid #ccc', borderRadius: '4px' }}>
