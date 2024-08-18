@@ -6,12 +6,25 @@ import { pubNubServer, blockchain, transactionPool } from "../server.mjs";
 // @desc Hämta hela blockkedjan
 // @route GET /api/v1/blockchain
 // @access PUBLIC
-export const getBlockchain = asyncHandler(async (req, res, next) => {
-    res.status(200).json({
+
+export const getBlockchain = async (req, res, next) => {
+    try {
+      const blockchain = new Blockchain();
+      const chain = blockchain.getChain();
+      console.log('Blockchain chain:', chain); // Kontrollera vad som finns i kedjan
+  
+      const transactions = chain.flatMap(block => block.data);
+      console.log('Fetched transactions from blockchain:', transactions); // Kontrollera om transaktionerna finns
+  
+      res.status(200).json({
         success: true,
-        data: blockchain.getChain()  
-    });
-});
+        transactions,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+  
 
 // @desc Mine ett nytt block
 // @route POST /api/v1/blockchain/mine

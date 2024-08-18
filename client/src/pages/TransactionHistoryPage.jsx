@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Importera useLocation för att få åtkomst till state
+import { useLocation } from 'react-router-dom';
 import LogoutButton from '../components/LogoutButton';
 import GoBackButton from '../components/GoBackButton';
 
 const TransactionHistoryPage = () => {
   const [transactions, setTransactions] = useState([]);
-  const location = useLocation(); // Använd useLocation för att få åtkomst till state
+  const location = useLocation();
 
   useEffect(() => {
-    // Hämta användarens transaktionshistorik från backend
     const fetchTransactions = async () => {
-      const response = await fetch('http://localhost:3001/api/v1/transactions');
-      const data = await response.json();
-      setTransactions(data.transactions);
+      try {
+        const response = await fetch('http://localhost:3001/api/v1/blockchain'); // Hämta transaktioner från blockchain
+        const data = await response.json();
+        console.log('Fetched transactions:', data.transactions); // Logga transaktionerna för att se vad som returneras
+        setTransactions(data.transactions); // Spara transaktionerna i state
+      } catch (error) {
+        console.error('Error fetching transaction history:', error);
+      }
     };
 
     fetchTransactions();
@@ -21,7 +25,6 @@ const TransactionHistoryPage = () => {
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
       <h2>Transaction History</h2>
-      {/* Visa framgångsmeddelandet om det finns */}
       {location.state?.successMessage && (
         <div style={{ padding: '10px', backgroundColor: '#d4edda', color: '#155724', borderRadius: '4px', marginBottom: '20px' }}>
           {location.state.successMessage}
@@ -31,9 +34,11 @@ const TransactionHistoryPage = () => {
         <ul>
           {transactions.map((transaction, index) => (
             <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
-              <p><strong>To:</strong> {transaction.recipient}</p>
-              <p><strong>Amount:</strong> {transaction.amount}</p>
-              <p><strong>Date:</strong> {new Date(transaction.date).toLocaleString()}</p>
+              <p><strong>Transaction ID:</strong> {transaction.id}</p>
+              <p><strong>Sender:</strong> {transaction.inputMap?.address || 'N/A'}</p>
+              <p><strong>Recipient:</strong> {Object.keys(transaction.outputMap).find(addr => addr !== transaction.inputMap.address)}</p>
+              <p><strong>Amount:</strong> {Object.values(transaction.outputMap).reduce((a, b) => b !== transaction.inputMap.amount ? b : a, 0)}</p>
+              <p><strong>Date:</strong> {new Date(transaction.inputMap?.timestamp).toLocaleString()}</p>
             </li>
           ))}
         </ul>

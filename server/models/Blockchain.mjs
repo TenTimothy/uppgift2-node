@@ -15,14 +15,16 @@ export default class Blockchain {
     getChain() {
         return this.chain;ß
     }
-
     async addBlock({ data }) {
         const lastBlock = this.chain[this.chain.length - 1];
         const newBlock = Block.mineBlock({ lastBlock, data });
         this.chain.push(newBlock);
+        console.log('New Block mined:', newBlock);
+        console.log('Block data:', newBlock.data); // Lägg till detta för att se innehållet i blocket
         await this.saveBlock(newBlock);
         return newBlock;
     }
+    
 
     async minePendingTransactions(minerAddress, transactionPool) {
         if (!minerAddress) {
@@ -78,7 +80,7 @@ export default class Blockchain {
             const blockchainDocument = await BlockchainModel.findOne().populate('chain');
             if (blockchainDocument) {
                 this.chain = blockchainDocument.chain.map(blockDoc => new Block(blockDoc));
-                console.log('Blockchain loaded from database.');
+                console.log('Blockchain loaded from database:', this.chain); // Kontrollera vad som laddas
             } else {
                 console.log('No existing blockchain found in database. Using genesis block.');
             }
@@ -86,6 +88,7 @@ export default class Blockchain {
             console.error("Error loading blockchain from database:", error);
         }
     }
+    
     
 
     static isValidChain(chain) {
