@@ -57,19 +57,22 @@ const AuthPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', border: '1px solid #ccc', borderRadius: '4px' }}>
-      <h1>{isLogin ? 'Login' : 'Register'}</h1>
-      <AuthForm
-        isLogin={isLogin}
-        name={name}
-        email={email}
-        password={password}
-        setName={setName}
-        setEmail={setEmail}
-        setPassword={setPassword}
-        handleSubmit={handleSubmit}
-      />
-      <ToggleButton isLogin={isLogin} onClick={toggleAuthMode} />
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      <h1 style={{ marginTop: '-30px', color: 'white' }}>Sonic-Chain</h1> 
+      <div style={{ maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '4px'}}>
+        <AuthForm
+          isLogin={isLogin}
+          name={name}
+          email={email}
+          password={password}
+          setName={setName}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          handleSubmit={handleSubmit}
+        />
+        <ToggleButton isLogin={isLogin} onClick={toggleAuthMode} />
+      </div>
+      <h2 style={{ marginTop: '30px', color: 'white' }}>Sound Together</h2> 
     </div>
   );
 };

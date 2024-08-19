@@ -14,13 +14,12 @@ const TransactionHistoryPage = () => {
         const data = await response.json();
 
         console.log('Fetched blockchain:', data.blockchain);
-        
-        
+
         const allTransactions = data.blockchain.flatMap(block => 
           block.data.map(transaction => ({
             ...transaction,
-            blockHash: block.hash, 
-            timestamp: block.timestamp 
+            blockHash: block.hash,
+            timestamp: block.timestamp
           }))
         );
 
@@ -34,23 +33,33 @@ const TransactionHistoryPage = () => {
   }, []);
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+    <div className="container">
       <h2>Transaction History</h2>
       {location.state?.successMessage && (
-        <div style={{ padding: '10px', backgroundColor: '#d4edda', color: '#155724', borderRadius: '4px', marginBottom: '20px' }}>
+        <div style={{ padding: '8px', backgroundColor: '#d4edda', color: '#155724', borderRadius: '4px', marginBottom: '15px', textAlign: 'center' }}>
           {location.state.successMessage}
         </div>
       )}
       {transactions.length > 0 ? (
-        <ul>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '8px' }}>
           {transactions.map((transaction, index) => {
             const sender = transaction.inputMap?.address || 'N/A';
             const recipient = Object.keys(transaction.outputMap).find(addr => addr !== sender);
             const amountSent = transaction.outputMap[recipient];
             const remainingBalance = transaction.outputMap[sender];
-
+  
             return (
-              <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+              <div key={index} style={{
+                padding: '8px', 
+                border: '1px solid #ccc',
+                borderRadius: '6px', 
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                backgroundColor: '#f9f9f9',
+                color: 'black',
+                textAlign: 'left',
+                fontSize: '0.9em',
+                wordWrap: 'break-word',
+              }}>
                 <p><strong>Transaction ID:</strong> {transaction.id}</p>
                 <p><strong>Sender:</strong> {sender}</p>
                 <p><strong>Recipient:</strong> {recipient}</p>
@@ -59,17 +68,19 @@ const TransactionHistoryPage = () => {
                 <p><strong>Date:</strong> {new Date(transaction.timestamp).toLocaleString()}</p>
                 <p><strong>Timestamp:</strong> {transaction.timestamp}</p>
                 <p><strong>Block Hash:</strong> {transaction.blockHash}</p>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       ) : (
-        <p>No transactions found.</p>
+        <p style={{ textAlign: 'center', color: 'black' }}>No transactions found.</p>
       )}
-      <LogoutButton />
-      <GoBackButton />
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+        <LogoutButton />
+        <GoBackButton />
+      </div>
     </div>
-  );
+  );  
 };
 
 export default TransactionHistoryPage;

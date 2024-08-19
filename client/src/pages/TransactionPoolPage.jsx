@@ -38,8 +38,6 @@ const TransactionPoolPage = () => {
       if (data.success) {
         console.log('Block mined successfully:', data.data);
         setTransactions([]); 
-        
-        
         navigate('/transaction-history', { state: { successMessage: 'Block mined successfully!' } });
       } else {
         console.error('Error mining block:', data.error);
@@ -52,12 +50,12 @@ const TransactionPoolPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', textAlign: 'center' }}> 
       <h2>Transaction Pool</h2>
       {transactions.length > 0 ? (
-        <ul>
+        <ul style={{ padding: '0', listStyleType: 'none' }}>
           {transactions.map((transaction) => (
-            <li key={transaction.id} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+            <li key={transaction.id} style={{ marginBottom: '10px', padding: '15px', border: '1px solid #ccc', borderRadius: '4px', textAlign: 'left', fontWeight: 'bold' }}> 
               <p><strong>Transaction ID:</strong> {transaction.id}</p>
               <p><strong>Sender:</strong> {transaction.sender || 'N/A'}</p>
               <p><strong>Recipient:</strong> {transaction.recipient || 'N/A'}</p>
@@ -73,12 +71,13 @@ const TransactionPoolPage = () => {
         disabled={mining || transactions.length === 0}
         style={{
           padding: '10px 20px',
-          backgroundColor: '#007BFF',
-          color: 'white',
-          border: 'none',
+          backgroundColor: 'white',
+          color: 'black',
+          border: '1px solid #ccc',
           borderRadius: '4px',
           cursor: 'pointer',
-          marginTop: '20px',
+          margin: '20px auto',
+          display: 'block',  
         }}
       >
         {mining ? 'Mining...' : 'Mine Block'}

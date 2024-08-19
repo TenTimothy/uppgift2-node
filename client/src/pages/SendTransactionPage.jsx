@@ -3,6 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import LogoutButton from '../components/LogoutButton';
 import GoBackButton from '../components/GoBackButton';
 
+const inputStyle = {
+  width: '100%',
+  padding: '10px',
+  backgroundColor: 'white',
+  color: 'black',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  boxSizing: 'border-box', 
+  fontWeight: 'bold',  
+};
+
+const buttonStyle = {
+  width: '100%',
+  padding: '10px',
+  backgroundColor: 'white',
+  color: 'black',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  boxSizing: 'border-box',  
+};
+
 const SendTransactionPage = () => {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
@@ -64,23 +86,6 @@ const SendTransactionPage = () => {
       <GoBackButton />
     </div>
   );
-};
-
-const inputStyle = {
-  width: '100%',
-  padding: '8px',
-  boxSizing: 'border-box',
-  marginBottom: '10px',
-};
-
-const buttonStyle = {
-  width: '100%',
-  padding: '10px',
-  backgroundColor: 'white',
-  color: 'black',
-  border: 'none',
-  borderRadius: '4px',
-  cursor: 'pointer',
 };
 
 export default SendTransactionPage;

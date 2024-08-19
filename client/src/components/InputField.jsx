@@ -3,7 +3,7 @@ import React from 'react';
 const InputField = ({ label, type, value, onChange, placeholder }) => {
   return (
     <div style={{ marginBottom: '10px' }}>
-      <label style={{ color: '#ffffff', fontWeight: 'bold' }}>{label}</label> {/* Ändra etikettens färg här */}
+      <label style={{ color: '#ffffff', fontWeight: 'bold' }}>{label}</label>
       <input
         type={type}
         placeholder={placeholder}
@@ -16,7 +16,7 @@ const InputField = ({ label, type, value, onChange, placeholder }) => {
           boxSizing: 'border-box',
           marginBottom: '10px',
           backgroundColor: 'white', 
-          color: '#ffffff', 
+          color: 'black', 
           border: '1px solid #555', 
           borderRadius: '4px',
           fontSize: '16px',

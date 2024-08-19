@@ -18,7 +18,7 @@ const LogoutButton = () => {
     </button>
   );
 };
-s
+
 const logoutButtonStyle = {
   position: 'fixed',
   top: '10px',
