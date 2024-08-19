@@ -28,15 +28,16 @@ const AuthForm = ({ isLogin, name, email, password, setName, setEmail, setPasswo
         onChange={(e) => setPassword(e.target.value)}
       />
       <button
-        type="submit"
-        style={{
+          type="submit"
+          style={{
           width: '100%',
           padding: '10px',
-          backgroundColor: '#007BFF',
-          color: 'white',
+          background: 'white',
+          color: 'black',
           border: 'none',
           borderRadius: '4px',
           cursor: 'pointer',
+  
         }}
       >
         {isLogin ? 'Login' : 'Register'}

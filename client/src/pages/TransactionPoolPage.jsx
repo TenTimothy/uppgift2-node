@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importera useNavigate för att navigera
+import { useNavigate } from 'react-router-dom'; 
 import LogoutButton from '../components/LogoutButton';
 import GoBackButton from '../components/GoBackButton';
 
 const TransactionPoolPage = () => {
   const [transactions, setTransactions] = useState([]);
   const [mining, setMining] = useState(false);
-  const navigate = useNavigate(); // Använd useNavigate för att navigera
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchTransactionPool = async () => {
@@ -25,7 +25,7 @@ const TransactionPoolPage = () => {
   const handleMineBlock = async () => {
     setMining(true);
     try {
-      const minerAddress = 'your-miner-address'; // Ange din miners address här
+      const minerAddress = 'your-miner-address'; 
       const response = await fetch('http://localhost:3001/api/v1/blockchain/mine', {
         method: 'POST',
         headers: {
@@ -37,9 +37,9 @@ const TransactionPoolPage = () => {
       const data = await response.json();
       if (data.success) {
         console.log('Block mined successfully:', data.data);
-        setTransactions([]); // Töm transaktionspoolen efter mining
+        setTransactions([]); 
         
-        // Navigera till TransactionHistoryPage med ett framgångsmeddelande
+        
         navigate('/transaction-history', { state: { successMessage: 'Block mined successfully!' } });
       } else {
         console.error('Error mining block:', data.error);

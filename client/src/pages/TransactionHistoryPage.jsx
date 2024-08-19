@@ -15,12 +15,12 @@ const TransactionHistoryPage = () => {
 
         console.log('Fetched blockchain:', data.blockchain);
         
-        // Extrahera alla transaktioner från varje block i blockkedjan
+        
         const allTransactions = data.blockchain.flatMap(block => 
           block.data.map(transaction => ({
             ...transaction,
-            blockHash: block.hash,  // Lägg till blockets hash för att visa detta
-            timestamp: block.timestamp // Lägg till blockets timestamp
+            blockHash: block.hash, 
+            timestamp: block.timestamp 
           }))
         );
 

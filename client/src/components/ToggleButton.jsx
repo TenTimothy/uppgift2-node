@@ -7,7 +7,7 @@ const ToggleButton = ({ isLogin, onClick }) => {
         onClick={onClick}
         style={{
           backgroundColor: 'transparent',
-          color: '#007BFF',
+          color: 'white',
           border: 'none',
           cursor: 'pointer',
           textDecoration: 'underline',

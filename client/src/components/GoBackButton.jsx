@@ -16,11 +16,11 @@ const GoBackButton = () => {
 
 const goBackButtonStyle = {
   position: 'fixed',
-  top: '50px',
+  top: '10px',
   left: '10px',
   padding: '10px 20px',
-  backgroundColor: '#28a745',
-  color: 'white',
+  backgroundColor: 'white',
+  color: 'black',
   border: 'none',
   borderRadius: '4px',
   cursor: 'pointer',

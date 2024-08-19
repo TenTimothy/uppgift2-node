@@ -6,7 +6,7 @@ import GoBackButton from '../components/GoBackButton';
 const SendTransactionPage = () => {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
-  const navigate = useNavigate(); // Hook för att navigera mellan sidor
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +25,7 @@ const SendTransactionPage = () => {
       const data = await response.json();
       if (data.success) {
         console.log('Transaction sent successfully:', data.data);
-        navigate('/transaction-pool'); // Navigera till TransactionPoolPage efter att transaktionen har skickats
+        navigate('/transaction-pool'); 
       } else {
         console.error('Error sending transaction:', data.error);
       }
@@ -76,8 +76,8 @@ const inputStyle = {
 const buttonStyle = {
   width: '100%',
   padding: '10px',
-  backgroundColor: '#007BFF',
-  color: 'white',
+  backgroundColor: 'white',
+  color: 'black',
   border: 'none',
   borderRadius: '4px',
   cursor: 'pointer',
