@@ -5,7 +5,6 @@ const INITIAL_DIFFICULTY = 3;
 
 export const GENESIS_DATA = {
     timestamp: 1,
-    //timestamp: date.now()
     lastHash: '0',
     hash: '0',
     difficulty: INITIAL_DIFFICULTY,

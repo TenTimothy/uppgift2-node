@@ -43,17 +43,25 @@ const TransactionHistoryPage = () => {
       )}
       {transactions.length > 0 ? (
         <ul>
-          {transactions.map((transaction, index) => (
-            <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
-              <p><strong>Transaction ID:</strong> {transaction.id}</p>
-              <p><strong>Sender:</strong> {transaction.inputMap?.address || 'N/A'}</p>
-              <p><strong>Recipient:</strong> {Object.keys(transaction.outputMap).find(addr => addr !== transaction.inputMap?.address)}</p>
-              <p><strong>Amount:</strong> {Object.values(transaction.outputMap).reduce((a, b) => b !== transaction.inputMap?.amount ? b : a, 0)}</p>
-              <p><strong>Date:</strong> {new Date(transaction.timestamp).toLocaleString()}</p>
-              <p><strong>Timestamp:</strong> {transaction.timestamp}</p>
-              <p><strong>Block Hash:</strong> {transaction.blockHash}</p>
-            </li>
-          ))}
+          {transactions.map((transaction, index) => {
+            const sender = transaction.inputMap?.address || 'N/A';
+            const recipient = Object.keys(transaction.outputMap).find(addr => addr !== sender);
+            const amountSent = transaction.outputMap[recipient];
+            const remainingBalance = transaction.outputMap[sender];
+
+            return (
+              <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+                <p><strong>Transaction ID:</strong> {transaction.id}</p>
+                <p><strong>Sender:</strong> {sender}</p>
+                <p><strong>Recipient:</strong> {recipient}</p>
+                <p><strong>Amount Sent:</strong> {amountSent}</p>
+                <p><strong>Remaining Balance:</strong> {remainingBalance !== undefined ? remainingBalance : 'N/A'}</p>
+                <p><strong>Date:</strong> {new Date(transaction.timestamp).toLocaleString()}</p>
+                <p><strong>Timestamp:</strong> {transaction.timestamp}</p>
+                <p><strong>Block Hash:</strong> {transaction.blockHash}</p>
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <p>No transactions found.</p>

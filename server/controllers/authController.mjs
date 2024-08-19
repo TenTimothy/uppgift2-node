@@ -3,9 +3,7 @@ import User from '../models/UserModel.mjs';
 import ErrorResponse from '../utils/ErrorResponse.mjs';
 import asyncHandler from '../middlewares/asyncHandler.mjs';
 
-// @desc Registrera en användare
-// @route POST /api/v1/auth/register
-// @access PUBLIC
+
 export const register = asyncHandler(async (req, res, next) => {
     const { name, email, password, role } = req.body;
 
@@ -16,9 +14,6 @@ export const register = asyncHandler(async (req, res, next) => {
     createAndSendToken(user, 201, res);
 });
 
-// @desc Logga in en användare
-// @route POST /api/v1/auth/login
-// @access PUBLIC
 export const login = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
 
@@ -41,9 +36,7 @@ export const login = asyncHandler(async (req, res, next) => {
     createAndSendToken(user, 200, res);
 });
 
-// @desc Returnera information om en inloggad användare
-// @route GET /api/v1/auth/me
-// @access PRIVATE
+
 export const getMe = asyncHandler(async (req, res, next) => {
     const user = await User.findById(req.user.id);
 
@@ -54,9 +47,6 @@ export const getMe = asyncHandler(async (req, res, next) => {
     });
 });
 
-// @desc Glömt lösenord
-// @route POST /api/v1/auth/forgotpassword
-// @access PUBLIC
 export const forgotPassword = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
 
@@ -82,9 +72,6 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
     }
 });
 
-// @desc Återställ lösenord
-// @route PUT /api/v1/auth/resetpassword/:token
-// @access PUBLIC
 export const resetPassword = asyncHandler(async (req, res, next) => {
     const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
 

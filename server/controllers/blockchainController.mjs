@@ -4,9 +4,7 @@ import Blockchain from '../models/Blockchain.mjs';
 import BlockchainDBModel from '../models/BlockchainDBModel.mjs';
 import { pubNubServer, blockchain, transactionPool } from "../server.mjs"; 
 
-// @desc Hämta hela blockkedjan
-// @route GET /api/v1/blockchain
-// @access PUBLIC
+
 
 export const getBlockchain = (req, res) => {
     try {
@@ -33,10 +31,6 @@ export const getBlockchain = (req, res) => {
 };
 
   
-
-// @desc Mine ett nytt block
-// @route POST /api/v1/blockchain/mine
-// @access PRIVATE
 export const mineBlock = (req, res, next) => {
     try {
         const { minerAddress } = req.body;
@@ -64,9 +58,7 @@ export const mineBlock = (req, res, next) => {
     }
 };
 
-// @desc Hämta ett specifikt block baserat på index
-// @route GET /api/v1/blockchain/:index
-// @access PUBLIC
+
 export const getBlockByIndex = asyncHandler(async (req, res, next) => {
     const { index } = req.params;
     const blockIndex = parseInt(index, 10);
@@ -82,9 +74,7 @@ export const getBlockByIndex = asyncHandler(async (req, res, next) => {
     });
 });
 
-// @desc Validera hela blockkedjan
-// @route GET /api/v1/blockchain/validate
-// @access PUBLIC
+
 export const validateBlockchain = asyncHandler(async (req, res, next) => {
     try {
         const chain = blockchain.getChain();

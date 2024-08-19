@@ -366,5 +366,43 @@
     ],
     "nonce": 3,
     "difficulty": 3
+  },
+  {
+    "timestamp": 1724026799357,
+    "lastHash": "0fefe3d67c9f84ac716fc7ab2fef53fe081becabd18ed583bc450f0062a2b62e",
+    "hash": "17a51a27b5c62a1be01e7e9352efdc5f920f35da629c2fa7ca6b833a21780e7c",
+    "data": [
+      {
+        "id": "f6402f91a85843748914786f96d83386",
+        "outputMap": {
+          "Ten ": "10",
+          "0287583cfd76772becba11adcb08c471ed9aa5330056232dc30f232dd373ec7843": 990
+        },
+        "inputMap": {
+          "timestamp": 1724026797035,
+          "amount": 1000,
+          "address": "0287583cfd76772becba11adcb08c471ed9aa5330056232dc30f232dd373ec7843",
+          "signature": {
+            "r": "290857e38263f16fbbf714decddc509bd8b8e7bad58adcf8497f4974b06f0d9a",
+            "s": "c9dc1af3f71101e908dabcb964e3a4b3976fabaa737004328419e5e7d6f54164",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "1cf715f110bf4d9d8eec7edf45273574",
+        "outputMap": {
+          "your-miner-address": 50
+        },
+        "inputMap": {
+          "timestamp": 1724026799357,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 1,
+    "difficulty": 3
   }
 ]
