@@ -480,5 +480,60 @@
     ],
     "nonce": 2,
     "difficulty": 3
+  },
+  {
+    "timestamp": 1724166688749,
+    "lastHash": "0b3f67b6ad73f4f8a64c52280bebde4894a13c16d6ea1ffd617579165d7a83e9",
+    "hash": "0ae85b87993cc9865552ccbc737f479c1721f63d67caf62fabf981a9235e68ec",
+    "data": [
+      {
+        "id": "8f7a5a7842fd41f0b935e4b121b6ef03",
+        "outputMap": {
+          "TEN ": "400",
+          "035101f876be78b70644f823f6aa8402dc2e504512447078d0b3f594cc1e0a1470": 600
+        },
+        "inputMap": {
+          "timestamp": 1724166676186,
+          "amount": 1000,
+          "address": "035101f876be78b70644f823f6aa8402dc2e504512447078d0b3f594cc1e0a1470",
+          "signature": {
+            "r": "6f1bacf693c60ec48c4d74094eeb357e10086e15c3186891a6c5596332e84e4",
+            "s": "d82af47e618d2e16876427994207051cb452d0c56e4a91994fe16d442aa26d5",
+            "recoveryParam": 1
+          }
+        }
+      },
+      {
+        "id": "7df23601add445a19e091a74a20461fc",
+        "outputMap": {
+          "LEVI ": "560",
+          "02dd0d3e82d0151c7529e53badfbe5021e091b27336c4edc6e65f22c0ac9f1b8d1": 440
+        },
+        "inputMap": {
+          "timestamp": 1724166687786,
+          "amount": 1000,
+          "address": "02dd0d3e82d0151c7529e53badfbe5021e091b27336c4edc6e65f22c0ac9f1b8d1",
+          "signature": {
+            "r": "395958f412d10f6e33a0a9628bac1dd24faaee20302e4360ecfbc8bee2d7c75e",
+            "s": "f4ccfde15aefa2cc8b84b8763941392c1e224aec500940788fe669c2b07c2a42",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "d276a6c85b2749d0bcab601854709336",
+        "outputMap": {
+          "your-miner-address": 50
+        },
+        "inputMap": {
+          "timestamp": 1724166688748,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 4,
+    "difficulty": 3
   }
 ]
