@@ -12,6 +12,7 @@ import transactionRoute from './routes/transactionRoute.mjs';
 import transactionPoolRoute from './routes/transactionPoolRoute.mjs';
 import Blockchain from './models/Blockchain.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
+import Wallet from './models/Wallet.mjs';
 import { errorHandler } from './middlewares/errorHandler.mjs';
 import { saveBlockchain } from './controllers/blockchainController.mjs';
 
@@ -38,9 +39,10 @@ const credentials = {
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
+const wallet = new Wallet();
 const pubNubServer = new PubNubServerClass({ blockchain, credentials });
 
-export { pubNubServer, blockchain, transactionPool };
+export { pubNubServer, blockchain, transactionPool, wallet };
 
 
 let NODE_PORT = process.env.PORT || 3001;

@@ -6,7 +6,7 @@ export default class Wallet {
     constructor() {
         this.balance = INITIAL_BALANCE;
         this.keyPair = ellipticHash.genKeyPair();
-        this.publicKey = this.keyPair.getPublic().encodeCompressed('hex');
+        this.publicKey = this.keyPair.getPublic().encode('hex');
     };
 
     sign(data) {

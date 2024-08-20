@@ -1,11 +1,9 @@
-import { transactionPool } from '../server.mjs';
-import Wallet from '../models/Wallet.mjs';
+import { transactionPool, wallet } from '../server.mjs';
 
 export const createTransaction = (req, res, next) => {
     try {
-        const { recipient, amount } = req.body;
-        const sender = new Wallet(); 
-        const transaction = sender.createTransaction({ recipient, amount });
+        const { recipient, amount } = req.body; 
+        const transaction = wallet.createTransaction({ recipient, amount });
 
         transactionPool.addOrUpdateTransaction(transaction);
 
