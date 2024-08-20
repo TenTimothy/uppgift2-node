@@ -31,7 +31,7 @@ export const createTransaction = (req, res, next) => {
             chain: blockchain.chain,
         });
 
-        transactionPool.setTransaction(transaction);
+        transactionPool.addTransactions(transaction);
 
         res.status(201).json({
             success: true,

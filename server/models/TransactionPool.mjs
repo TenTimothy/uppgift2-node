@@ -2,11 +2,11 @@ import Transaction from './Transaction.mjs';
 
 export default class TransactionPool {
     constructor() {
-        this.transactions = [];
+        this.transactions = {};
     }
 
-    setTransactions(transactions) {
-        this.transactions = transactions;
+    addTransactions(transactions) {
+        this.transactions[transactions.id] = transactions;
     }
 
     addOrUpdateTransaction(transaction) {

@@ -2,7 +2,7 @@ import { transactionPool } from '../server.mjs';
 
 export const getTransactionPool = (req, res, next) => {
     try {
-        const transactions = transactionPool.transactions.map(transaction => {
+   /*     const transactions = transactionPool.transactions.map(transaction => {
             const sender = transaction.inputMap.address; 
             const recipient = Object.keys(transaction.outputMap).find(address => address !== sender); 
             const amount = transaction.outputMap[recipient];
@@ -13,11 +13,11 @@ export const getTransactionPool = (req, res, next) => {
                 recipient,
                 amount,
             };
-        });
+        });*/
 
         res.status(200).json({
             success: true,
-            data: transactions,
+            data: transactionPool.transactions,
         });
     } catch (error) {
         next(error);

@@ -14,6 +14,7 @@ export default class Wallet {
     };
 
     createTransaction({ recipient, amount, chain }) {
+
         if (chain) {
             this.balance = this.constructor.calculateBalance({
                 chain,
@@ -34,8 +35,10 @@ export default class Wallet {
 
         for (let i = chain.length - 1; i > 0; i--) {
             const block = chain[i];
+            const data = Object.values(block.data[0]);
 
-            for (let transaction of block.data) {
+            for (let transaction of data) {
+                
                 if (transaction.inputMap.address === address) {
                     hasAddedTransaction = true;
                 }
