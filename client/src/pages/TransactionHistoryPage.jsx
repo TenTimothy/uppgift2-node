@@ -79,6 +79,7 @@ const TransactionHistoryPage = () => {
               <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {block.data.map((transaction, tIndex) => {
                   const sender = transaction.inputMap?.address || 'N/A';
+                  const isRewardTransaction = sender === '*authorized-reward*';
                   return (
                     <li key={`${transaction.id}-${tIndex}`} style={{ marginBottom: '8px' }}>
                       <p><strong>Transaction ID:</strong> {transaction.id}</p>
@@ -88,8 +89,8 @@ const TransactionHistoryPage = () => {
                           .filter(([recipient, _]) => recipient !== sender)
                           .map(([recipient, amount], rIndex) => (
                             <li key={`${recipient}-${rIndex}`}>
-                              <p><strong>Reward Amount:</strong> {amount}</p>
                               <p><strong>Recipient:</strong> {recipient}</p>
+                              <p><strong>{isRewardTransaction ? 'Reward Received' : 'Amount Received'}:</strong> {amount}</p>
                             </li>
                           ))}
                       </ul>
