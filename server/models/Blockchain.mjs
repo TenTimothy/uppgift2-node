@@ -22,7 +22,8 @@ export default class Blockchain {
         const lastBlock = this.chain[this.chain.length - 1];
         const newBlock = Block.mineBlock({ lastBlock, data });
         this.chain.push(newBlock);
-        
+        //Här krånglar det med nodemon//
+        this.saveBlockchainToFile();
         return newBlock;
     }
 
@@ -68,6 +69,15 @@ export default class Blockchain {
         const newBlock = this.addBlock({ data: blockData });
         transactionPool.clear();
         return newBlock;
+    }
+
+    replaceChain(chain, callback){
+        if(chain.length <= this.chain.length) return;
+        if(!Blockchain.isValidChain(chain)) return;
+
+        if(callback) callback();
+
+        this.chain = chain;
     }
 
     static isValidChain(chain) {

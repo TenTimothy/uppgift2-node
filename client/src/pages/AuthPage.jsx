@@ -44,17 +44,17 @@ const AuthPage = () => {
       const data = await response.json();
   
       if (data.success) {
-        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('authToken', data.token);  
         setIsAuthenticated(true);
-        navigate('/home'); 
-        console.log('Login/Register successful', data);
+        navigate('/home');
       } else {
-        console.error('Error during authentication', data.error);
+        console.error('Error during authentication', data.message);
       }
     } catch (error) {
       console.error('An unexpected error occurred:', error);
     }
   };
+
 
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>

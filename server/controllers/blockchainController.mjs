@@ -19,7 +19,7 @@ export const getBlockchain = (req, res) => {
 
         res.status(200).json({
             success: true,
-            blockchain: chain, 
+            data: chain, 
         });
     } catch (error) {
         res.status(500).json({
@@ -44,7 +44,7 @@ export const mineBlock = (req, res, next) => {
 
         
         const newBlock = blockchain.minePendingTransactions(wallet.publicKey, transactionPool);
-
+        pubNubServer.broadcast();
         res.status(201).json({
             success: true,
             data: newBlock,

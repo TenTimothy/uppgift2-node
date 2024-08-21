@@ -3,10 +3,10 @@ import { verifySignature } from '../utils/crypto-lib.mjs';
 import { MINING_REWARD, REWARD_INPUT } from '../config/settings.mjs';
 
 export default class Transaction {
-    constructor({ sender, recipient, amount }) {
+    constructor({ sender, recipient, amount, outputMap, inputMap }) {
         this.id = uuidv4().replaceAll('-', '');
-        this.outputMap = this.createOutputMap({ sender, recipient, amount });
-        this.inputMap = this.createInputMap({ sender, outputMap: this.outputMap });
+        this.outputMap = outputMap || this.createOutputMap({ sender, recipient, amount });
+        this.inputMap = inputMap || this.createInputMap({ sender, outputMap: this.outputMap });
     }
 
     static validate(transaction) {

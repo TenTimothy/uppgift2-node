@@ -23,7 +23,7 @@ connectDb();
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: 'http://localhost:5174', 
     credentials: true, 
 }));
 
@@ -45,7 +45,8 @@ const pubNubServer = new PubNubServerClass({ blockchain, credentials });
 export { pubNubServer, blockchain, transactionPool, wallet };
 
 
-let NODE_PORT = process.env.PORT || 3001;
+let NODE_PORT = +process.env.PORT || 3001;
+let ROOT_NODE = `http://localhost:${NODE_PORT}`;
 
 if (process.env.GENERATE_NODE_PORT === 'true') {
     
@@ -63,12 +64,26 @@ app.use('/api/v1/wallet', walletRouter);
 
 app.use(errorHandler);
 
+const synchronizeNode = async () => {
+    let response = await fetch(`${ROOT_NODE}/api/v1/blockchain`);
+    if(response.ok) {
+        const result = await response.json();
+        blockchain.replaceChain(result.data);
+    }
+
+    response = await fetch(`${ROOT_NODE}/api/v1/transaction-pool`);
+    if (response.ok) {
+        const result = await response.json();
+        transactionPool.transactions = result.data;
+    }
+};
+
+
 const server = app.listen(NODE_PORT, () => {
     console.log(`Server is running on port: ${NODE_PORT}`.bgYellow);
+    if(NODE_PORT !== 3001) {
+        synchronizeNode();
+    }
     saveBlockchain(blockchain.chain);
 });
 
-/*process.on('unhandledRejection', (err, promise) => {
-    console.log(`FEL: ${err.message}`);
-    server.close(() => process.exit(1));
-});*/

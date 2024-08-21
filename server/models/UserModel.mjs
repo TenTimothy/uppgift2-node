@@ -6,11 +6,11 @@
  const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Namne måste anges']
+        required: [true, 'Name must be provided']
     },
     email: {
         type: String, 
-        required: [true, 'E-post måste anges'],
+        required: [true, 'Email must be provided'],
         unique: true,
         match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Ange en korrekt e-post adress'],
 
@@ -46,7 +46,7 @@
  };
 
  userSchema.methods.generateToken = function () {
-    return jwt.sign({ id: this._id }, process.env.JWT_SECRET,{
+    return jwt.sign({ id: this._id, name: this.name }, process.env.JWT_SECRET,{
         expiresIn: process.env.JWT_TTL,
     });
  };

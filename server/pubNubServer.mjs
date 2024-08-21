@@ -1,8 +1,10 @@
 import PubNub from "pubnub";
+import Transaction from "./models/Transaction.mjs";
 
 const CHANNELS = {
     DEMO: 'DEMO',
     BLOCKCHAIN: 'BLOCKCHAIN',
+    TRANSACTION: 'TRANSACTION',
 };
 
 
@@ -35,6 +37,13 @@ export default class PubNubServer {
         });
     }
 
+    broadcastTransaction(transaction) {
+        this.publish({ 
+            channel: CHANNELS.TRANSACTION, 
+            message: JSON.stringify(transaction) 
+        });
+    }
+
     listener() {
         return {
             message: (msgObject) => {
@@ -42,9 +51,26 @@ export default class PubNubServer {
                 const msg = JSON.parse(message);
                 console.log(`Meddelande mottagits på kanal: ${channel}, meddelande: ${message}`);
 
-                if (channel === CHANNELS.BLOCKCHAIN) {
-                    this.blockchain.replaceChain(msg);
-                }
+                switch (channel) {
+                    case CHANNELS.BLOCKCHAIN:
+                        this.blockchain.replaceChain(msg, () => {
+                            this.transactionPool.clear();
+                        });
+                        console.log('DEF');
+                        break;
+
+                    case CHANNELS.TRANSACTION:
+                        const {inputMap, outputMap, id} = msg
+                        const transaction = new Transaction({inputMap, outputMap});
+                        transaction.id = id;
+    
+                        this.transactionPool.addTransaction(transaction);
+                        console.log('ABC')
+                        break;
+
+                    default:
+                        return;
+                };
             },
         };
     }

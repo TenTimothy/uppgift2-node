@@ -1,4 +1,4 @@
-import { transactionPool, wallet, blockchain } from '../server.mjs';
+import { transactionPool, wallet, blockchain, pubNubServer } from '../server.mjs';
 
 export const createTransaction = (req, res, next) => {
     try {
@@ -14,6 +14,7 @@ export const createTransaction = (req, res, next) => {
         }   
 
         transactionPool.addTransactions(transaction);
+        pubNubServer.broadcastTransaction(transaction);
         res.status(201).json({ success: true, data: transaction });
     } catch (error) {
         next(error);
