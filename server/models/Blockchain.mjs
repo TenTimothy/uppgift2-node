@@ -22,7 +22,7 @@ export default class Blockchain {
         const lastBlock = this.chain[this.chain.length - 1];
         const newBlock = Block.mineBlock({ lastBlock, data });
         this.chain.push(newBlock);
-        this.saveBlockchainToFile(); 
+        
         return newBlock;
     }
 
@@ -31,10 +31,10 @@ export default class Blockchain {
             if (fs.existsSync(BLOCKCHAIN_FILE)) {
                 const fileData = fs.readFileSync(BLOCKCHAIN_FILE, 'utf8');
                 const chain = JSON.parse(fileData).map(block => new Block(block));
-                console.log('Blockchain loaded from file:', chain);
+              
                 return chain;
             } else {
-                console.log('No existing blockchain found. Creating a new one with genesis block.');
+                
                 const genesisBlock = [Block.genesis()];
                 this.saveBlockchainToFile(genesisBlock); 
                 return genesisBlock;
@@ -55,9 +55,9 @@ export default class Blockchain {
             }
 
             fs.writeFileSync(BLOCKCHAIN_FILE, JSON.stringify(chain, null, 2), 'utf-8');
-            console.log('Blockchain saved to file:', BLOCKCHAIN_FILE);
+            
         } catch (error) {
-            console.error("Error saving blockchain to file:", error);
+            
         }
     }
 
@@ -66,6 +66,7 @@ export default class Blockchain {
         const pendingTransactions = transactionPool.validateTransactions()
         const blockData = [...pendingTransactions, rewardTransaction];
         const newBlock = this.addBlock({ data: blockData });
+        transactionPool.clear();
         return newBlock;
     }
 

@@ -66,5 +66,274 @@
     ],
     "nonce": 7,
     "difficulty": 3
+  },
+  {
+    "timestamp": 1724259046808,
+    "lastHash": "0c729ada28bba14b0afe5038a91d13b5d29a6c0375c533d574fd46eec900b729",
+    "hash": "1a9a4d3f00f51afbf204b3182b65693646c3b6b2cbe5891daf9fe393b07e0892",
+    "data": [
+      {
+        "id": "7ef5b4f2f31a46dba25bc21fd07306ac",
+        "outputMap": {
+          "TROW": 10,
+          "048fee19e6cf923a4822757e0d9d81b8de0083f014d5a46d50554993e46d511201a26105447972d8c04d6a78e58c5bbfdcbb97afcc518786dcf39281b05245af88": 980,
+          "ROW": 10
+        },
+        "inputMap": {
+          "timestamp": 1724259029802,
+          "amount": 1000,
+          "address": "048fee19e6cf923a4822757e0d9d81b8de0083f014d5a46d50554993e46d511201a26105447972d8c04d6a78e58c5bbfdcbb97afcc518786dcf39281b05245af88",
+          "signature": {
+            "r": "658e1160e247a83042e329b6d1ca1889e74372ce7bbf7ef1b58ee908057a49a8",
+            "s": "229a546098c5b61bc897fc0b914576954795d79318e77a4ddbec524862297d1b",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "0a5da013d57b45daadac18dea0c50d23",
+        "outputMap": {
+          "048fee19e6cf923a4822757e0d9d81b8de0083f014d5a46d50554993e46d511201a26105447972d8c04d6a78e58c5bbfdcbb97afcc518786dcf39281b05245af88": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259046797,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 11,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724259078994,
+    "lastHash": "1a9a4d3f00f51afbf204b3182b65693646c3b6b2cbe5891daf9fe393b07e0892",
+    "hash": "17e28748d16ab9c02525d34db8b000da76b049012fb0d1e0146439c851039247",
+    "data": [
+      {
+        "id": "0949af0c491f47238332ad0a9a65a6e3",
+        "outputMap": {
+          "ROW": 10,
+          "04146304efb1c4124fb65d1c0bdfc3ec6502a49051f9deac93516a2a74a35e437cb8f72dace5fb22604b4498d2317bd8a802a162749c23d6d6c1be5a789ec1193f": 990
+        },
+        "inputMap": {
+          "timestamp": 1724259075567,
+          "amount": 1000,
+          "address": "04146304efb1c4124fb65d1c0bdfc3ec6502a49051f9deac93516a2a74a35e437cb8f72dace5fb22604b4498d2317bd8a802a162749c23d6d6c1be5a789ec1193f",
+          "signature": {
+            "r": "66283d164fe29237896e96a4915f75e8ca30414e0e761c18840c6365609ef7e4",
+            "s": "763909e7ba61e7b953370993d6c8026d6d0bd4ccfd2b504c635e9aed3fff2ff8",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "6128dc16f69b4d21866417451df06a14",
+        "outputMap": {
+          "04146304efb1c4124fb65d1c0bdfc3ec6502a49051f9deac93516a2a74a35e437cb8f72dace5fb22604b4498d2317bd8a802a162749c23d6d6c1be5a789ec1193f": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259078982,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 3,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724259174864,
+    "lastHash": "17e28748d16ab9c02525d34db8b000da76b049012fb0d1e0146439c851039247",
+    "hash": "0b74b12fdd0cba7cc8ecfc70209debd3b05f1114b6ff1de9dc1b2bd7be5d8f76",
+    "data": [
+      {
+        "id": "3ab37afa49124ed5b233220505f7d92d",
+        "outputMap": {
+          "R": 10,
+          "0453f5eb6d6b795fde88109176449d9a89668580b789abcf973d94cf19ff3a850135b803670458388101c783a5a7dd40ba569325491537058fb3357aa93e488562": 980,
+          "Z": 10
+        },
+        "inputMap": {
+          "timestamp": 1724259167509,
+          "amount": 1000,
+          "address": "0453f5eb6d6b795fde88109176449d9a89668580b789abcf973d94cf19ff3a850135b803670458388101c783a5a7dd40ba569325491537058fb3357aa93e488562",
+          "signature": {
+            "r": "79cdd784538e7aa1733e9741ed9886e254f999db23cddc70d55577045a121026",
+            "s": "1426924b311efb89d81d3a12ef11b6d9a1305a071e2baa69521481b3d366f929",
+            "recoveryParam": 1
+          }
+        }
+      },
+      {
+        "id": "1621e3f3d896468bb5b51748aa0ddd15",
+        "outputMap": {
+          "0453f5eb6d6b795fde88109176449d9a89668580b789abcf973d94cf19ff3a850135b803670458388101c783a5a7dd40ba569325491537058fb3357aa93e488562": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259174852,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 7,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724259187921,
+    "lastHash": "0b74b12fdd0cba7cc8ecfc70209debd3b05f1114b6ff1de9dc1b2bd7be5d8f76",
+    "hash": "003641e1cc779894168dda5e9f633d8758c48660594becb7cc78e86865daca95",
+    "data": [
+      {
+        "id": "73e5684aba74425eb13fbdb657408d23",
+        "outputMap": {
+          "T": 10,
+          "042220d7454d33d7d3bbcb43de8f129c1f7c7caa904792b455256df4510eed3acb74576434f40649bbe2af3204d5ffae829ef7f1a46dc8472efa2340522c6dfded": 990
+        },
+        "inputMap": {
+          "timestamp": 1724259184126,
+          "amount": 1000,
+          "address": "042220d7454d33d7d3bbcb43de8f129c1f7c7caa904792b455256df4510eed3acb74576434f40649bbe2af3204d5ffae829ef7f1a46dc8472efa2340522c6dfded",
+          "signature": {
+            "r": "6e9444c3190a8e80df305424e5b472059020621b2e5f1607324de1cd6c2b0534",
+            "s": "1e82febf41487338cb51eb4a908c71e3a6b21e9d602e0ec4ccfa4651119cafa",
+            "recoveryParam": 1
+          }
+        }
+      },
+      {
+        "id": "8a3983cc0a1f4b0c87264daa159cfa41",
+        "outputMap": {
+          "042220d7454d33d7d3bbcb43de8f129c1f7c7caa904792b455256df4510eed3acb74576434f40649bbe2af3204d5ffae829ef7f1a46dc8472efa2340522c6dfded": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259187911,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 12,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724259846856,
+    "lastHash": "003641e1cc779894168dda5e9f633d8758c48660594becb7cc78e86865daca95",
+    "hash": "1d32ac67e302e802c84be5c53dbf4efddd3d6cb32e508574e2beaf2c910a5f4e",
+    "data": [
+      {
+        "id": "1e94138e16884bb0a5109a8e80c29e0a",
+        "outputMap": {
+          "T": 10,
+          "04802b997634478fc825be85c986ec7c7c62b7a4f8f4888388d02dce956ea632086b4e3888a8a8068f25fa47bacb37e7bb99bdf555013f08dd134244416f35fc53": 990
+        },
+        "inputMap": {
+          "timestamp": 1724259843755,
+          "amount": 1000,
+          "address": "04802b997634478fc825be85c986ec7c7c62b7a4f8f4888388d02dce956ea632086b4e3888a8a8068f25fa47bacb37e7bb99bdf555013f08dd134244416f35fc53",
+          "signature": {
+            "r": "cbe9df7aae88b0361b448f3d3b7280d1b38868358eaf25b2a352e039405bd42f",
+            "s": "c40cf3442d03f62bf4b333e7c914e972d5b88d87d71b7e19a598b2efc874608d",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "4344962e9fe54ffa9d383905cc6828dc",
+        "outputMap": {
+          "04802b997634478fc825be85c986ec7c7c62b7a4f8f4888388d02dce956ea632086b4e3888a8a8068f25fa47bacb37e7bb99bdf555013f08dd134244416f35fc53": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259846840,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 9,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724259869820,
+    "lastHash": "1d32ac67e302e802c84be5c53dbf4efddd3d6cb32e508574e2beaf2c910a5f4e",
+    "hash": "19c6e159ce20ad4a3cdc0be06deadf6054bbf17c533b74d9efff278e2d1d926d",
+    "data": [
+      {
+        "id": "f7af9c24083b41e2865d166632fbb345",
+        "outputMap": {
+          "T": 10,
+          "0494353881dfebd211ee8d93d76a0b222e2e4af7680b42f3ca8a9aa7b019f9af5f2c9f5cea5f91f224464e845b138e3bf6a9ff110e7b41c52f57765288be7ff853": 990
+        },
+        "inputMap": {
+          "timestamp": 1724259865256,
+          "amount": 1000,
+          "address": "0494353881dfebd211ee8d93d76a0b222e2e4af7680b42f3ca8a9aa7b019f9af5f2c9f5cea5f91f224464e845b138e3bf6a9ff110e7b41c52f57765288be7ff853",
+          "signature": {
+            "r": "9942080692ff03fda6c7fd76fa516c0042b36ec7f25a56fff977db8da06e23a5",
+            "s": "636e2e44021251a564bdbaed2442a165890276da42c379e613e69f5bc2abbd40",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "8de12d968d734e74b151e0aa21d142b9",
+        "outputMap": {
+          "0494353881dfebd211ee8d93d76a0b222e2e4af7680b42f3ca8a9aa7b019f9af5f2c9f5cea5f91f224464e845b138e3bf6a9ff110e7b41c52f57765288be7ff853": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259869802,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 2,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724259906579,
+    "lastHash": "19c6e159ce20ad4a3cdc0be06deadf6054bbf17c533b74d9efff278e2d1d926d",
+    "hash": "065eb6184ebb88ff4d7bc160da1b513c49bee6e4c6b513e9ba81ffcb14866f94",
+    "data": [
+      {
+        "id": "b57a2b3ccf4e42f7bb2bdeaa70ffba61",
+        "outputMap": {
+          "T": 10,
+          "043f4b342a6d28d9a7b8fb17767561352c179f7b9a068e48e7bf471ddadbdb62d6234feba87350dedc4298b69aaf7ced0790f901c36bbb6a9990221b249b86b377": 980,
+          "R": 10
+        },
+        "inputMap": {
+          "timestamp": 1724259891492,
+          "amount": 1000,
+          "address": "043f4b342a6d28d9a7b8fb17767561352c179f7b9a068e48e7bf471ddadbdb62d6234feba87350dedc4298b69aaf7ced0790f901c36bbb6a9990221b249b86b377",
+          "signature": {
+            "r": "27b8c2d28127e3e4cc9d7ca988cf8bf62f42edff6578dc488eb86ac55e8add3e",
+            "s": "1e1b9a4e22252bd9e83e0d02412a3af96f791f95c1d51330b624b3fb2b304b20",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "44aca579a1da4477b897a96086afc5b9",
+        "outputMap": {
+          "043f4b342a6d28d9a7b8fb17767561352c179f7b9a068e48e7bf471ddadbdb62d6234feba87350dedc4298b69aaf7ced0790f901c36bbb6a9990221b249b86b377": 50
+        },
+        "inputMap": {
+          "timestamp": 1724259906564,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 25,
+    "difficulty": 3
   }
 ]

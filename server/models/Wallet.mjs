@@ -53,7 +53,7 @@ export default class Wallet {
                 break;
             }
         }
-
+        console.log('total value', total);
         return hasAddedTransaction ? total : INITIAL_BALANCE + total;
     }
 }

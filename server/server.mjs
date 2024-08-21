@@ -53,10 +53,7 @@ if (process.env.GENERATE_NODE_PORT === 'true') {
     NODE_PORT = 3002; 
 }
 
-const server = app.listen(NODE_PORT, () => {
-    console.log(`Server is running on port: ${NODE_PORT}`.bgYellow);
-    saveBlockchain(blockchain.chain);
-});
+
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/blockchain', blockchainRouter);
@@ -66,7 +63,12 @@ app.use('/api/v1/wallet', walletRouter);
 
 app.use(errorHandler);
 
-process.on('unhandledRejection', (err, promise) => {
+const server = app.listen(NODE_PORT, () => {
+    console.log(`Server is running on port: ${NODE_PORT}`.bgYellow);
+    saveBlockchain(blockchain.chain);
+});
+
+/*process.on('unhandledRejection', (err, promise) => {
     console.log(`FEL: ${err.message}`);
     server.close(() => process.exit(1));
-});
+});*/

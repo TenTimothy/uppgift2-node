@@ -14,7 +14,7 @@ export default class TransactionPool {
     }
 
     clear() {
-        this.transactions = [];
+        this.transactions = {};
     }
 
     clearBlockchainTransactions(chain) {
@@ -36,7 +36,6 @@ export default class TransactionPool {
 
     transactionExist({ address }) {
         const transactions = Object.values(this.transactions);
-        console.log('Transaction: ',transactions);
         return transactions.find(
             (transaction) => transaction.inputMap.address === address
         );

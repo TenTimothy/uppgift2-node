@@ -7,10 +7,10 @@ export const createTransaction = (req, res, next) => {
        
         if(transaction){
             transaction.update({ sender: wallet, recipient, amount })
-            console.log('A');
+       
         } else {
             transaction = wallet.createTransaction({ recipient, amount, chain: blockchain.chain });
-            console.log('B');
+           
         }   
 
         transactionPool.addTransactions(transaction);
