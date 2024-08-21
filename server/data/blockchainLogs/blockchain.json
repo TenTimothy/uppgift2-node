@@ -8,86 +8,79 @@
     "difficulty": 3
   },
   {
-    "timestamp": 1724173127406,
+    "timestamp": 1724255058225,
     "lastHash": "0",
-    "hash": "1baf432ed42965b2664adba67de686db1ac454f41084534e502817ed8281da6f",
+    "hash": "1fb3648ab8bae9abd03b2dbb1a219aea6483dfa964a953be56d31d70ffcc7836",
     "data": [
       {
-        "0841c76e098d4456869a236f2cd0e733": {
-          "id": "0841c76e098d4456869a236f2cd0e733",
-          "outputMap": {
-            "Ten": 100,
-            "04bbd6e608a0fc29a8ad4a03b096f409facebbc72fa5c3ce2be4bee76006affa5f42dfe6380d64c4f7753d280114d0e0ac16789bb9e4a8018e53927f8d9f54f0d6": 900
-          },
-          "inputMap": {
-            "timestamp": 1724173087381,
-            "amount": 1000,
-            "address": "04bbd6e608a0fc29a8ad4a03b096f409facebbc72fa5c3ce2be4bee76006affa5f42dfe6380d64c4f7753d280114d0e0ac16789bb9e4a8018e53927f8d9f54f0d6",
-            "signature": {
-              "r": "12f0ff5ddd25211851ceb707a154eb77b652f13f5a0427523f50089dbacfbc5b",
-              "s": "939aa1ee58b4786a416543df0180a8c20dc414828364dfc6dd261a7334a8b7a",
-              "recoveryParam": 0
-            }
-          }
+        "id": "802b7fbf8b6c41b39a64c556d7b8c192",
+        "outputMap": {
+          "din-miner-adress-här": 50
         },
-        "7c38485965d24db4942509b7b3db5b13": {
-          "id": "7c38485965d24db4942509b7b3db5b13",
-          "outputMap": {
-            "Rowel": 500,
-            "04bbd6e608a0fc29a8ad4a03b096f409facebbc72fa5c3ce2be4bee76006affa5f42dfe6380d64c4f7753d280114d0e0ac16789bb9e4a8018e53927f8d9f54f0d6": 500
-          },
-          "inputMap": {
-            "timestamp": 1724173101842,
-            "amount": 1000,
-            "address": "04bbd6e608a0fc29a8ad4a03b096f409facebbc72fa5c3ce2be4bee76006affa5f42dfe6380d64c4f7753d280114d0e0ac16789bb9e4a8018e53927f8d9f54f0d6",
-            "signature": {
-              "r": "12f0ff5ddd25211851ceb707a154eb77b652f13f5a0427523f50089dbacfbc5b",
-              "s": "939aa1ee58b4786a416543df0180a8c20dc414828364dfc6dd261a7334a8b7a",
-              "recoveryParam": 0
-            }
-          }
+        "inputMap": {
+          "timestamp": 1724255058224,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
         }
       }
     ],
-    "nonce": 12,
+    "nonce": 13,
     "difficulty": 3
   },
   {
-    "timestamp": 1724174248357,
-    "lastHash": "1baf432ed42965b2664adba67de686db1ac454f41084534e502817ed8281da6f",
-    "hash": "072a3e29888d41be8235b7a9e13a4460e2f52141fa2146e5a74fd986f7ce0378",
-    "data": [
-      {}
-    ],
-    "nonce": 6,
-    "difficulty": 3
-  },
-  {
-    "timestamp": 1724174269787,
-    "lastHash": "072a3e29888d41be8235b7a9e13a4460e2f52141fa2146e5a74fd986f7ce0378",
-    "hash": "1a77b39ebe54ae8d7c2d6d910c26fad1d79fe692004903cea6eb1d55b19341b3",
+    "timestamp": 1724255082962,
+    "lastHash": "1fb3648ab8bae9abd03b2dbb1a219aea6483dfa964a953be56d31d70ffcc7836",
+    "hash": "1c31e5e080502d843a6e8acf3bb2026b53bf3e7e9aa52633ed8bb94a40fcd0e6",
     "data": [
       {
-        "661fc4ab86e845489ac110d0893fb6c8": {
-          "id": "661fc4ab86e845489ac110d0893fb6c8",
-          "outputMap": {
-            "Rowel": 40,
-            "04c8a7e3eb4302f34b76658336bec5434574255e562de66c6eb5023e048b11cbfb481fcb64ebb73a8ec3c5dae83c26cba9882d9af27d91cb14f2cc35e0a3b3fb01": 960
-          },
-          "inputMap": {
-            "timestamp": 1724174260468,
-            "amount": 1000,
-            "address": "04c8a7e3eb4302f34b76658336bec5434574255e562de66c6eb5023e048b11cbfb481fcb64ebb73a8ec3c5dae83c26cba9882d9af27d91cb14f2cc35e0a3b3fb01",
-            "signature": {
-              "r": "6c1e7f9fbc5c0c6fdd6dee940becf0fd9f72343fe44570ee2628f3c5b60f2c26",
-              "s": "b4840896ac34da41d863b398b28d972232c92ef036901fafd58660a3dee8f16f",
-              "recoveryParam": 0
-            }
+        "id": "9b8433e34cd04c609263529bc87ce94f",
+        "outputMap": {
+          "rowel": 30,
+          "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7": 970
+        },
+        "inputMap": {
+          "timestamp": 1724255064083,
+          "amount": 1000,
+          "address": "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7",
+          "signature": {
+            "r": "fd35156037200a9ea28195a2a6ac60ff81ab3796f255f8f3732aca3d1287d9",
+            "s": "9127a902045db90945767a253da2e0d3cb564eff64d7f3d9c6e9e247ec39310e",
+            "recoveryParam": 0
           }
+        }
+      },
+      {
+        "id": "603bc4903105460facc099a341602aeb",
+        "outputMap": {
+          "ten": 10,
+          "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7": 990
+        },
+        "inputMap": {
+          "timestamp": 1724255073432,
+          "amount": 1000,
+          "address": "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7",
+          "signature": {
+            "r": "fd35156037200a9ea28195a2a6ac60ff81ab3796f255f8f3732aca3d1287d9",
+            "s": "9127a902045db90945767a253da2e0d3cb564eff64d7f3d9c6e9e247ec39310e",
+            "recoveryParam": 0
+          }
+        }
+      },
+      {
+        "id": "b4d9173052e8469f8c1feb588744b416",
+        "outputMap": {
+          "din-miner-adress-här": 50
+        },
+        "inputMap": {
+          "timestamp": 1724255082944,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
         }
       }
     ],
-    "nonce": 3,
+    "nonce": 1,
     "difficulty": 3
   }
 ]

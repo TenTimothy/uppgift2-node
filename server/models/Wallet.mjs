@@ -35,9 +35,8 @@ export default class Wallet {
 
         for (let i = chain.length - 1; i > 0; i--) {
             const block = chain[i];
-            const data = Object.values(block.data[0]);
 
-            for (let transaction of data) {
+            for (let transaction of block.data) {
                 
                 if (transaction.inputMap.address === address) {
                     hasAddedTransaction = true;

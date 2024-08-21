@@ -43,7 +43,7 @@ export const mineBlock = (req, res, next) => {
         }
 
         
-        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
+        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool);
 
         res.status(201).json({
             success: true,

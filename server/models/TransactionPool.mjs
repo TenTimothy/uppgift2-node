@@ -9,16 +9,6 @@ export default class TransactionPool {
         this.transactions[transactions.id] = transactions;
     }
 
-    addOrUpdateTransaction(transaction) {
-        const transactionIndex = this.transactions.findIndex(t => t.id === transaction.id);
-
-        if (transactionIndex >= 0) {
-            this.transactions[transactionIndex] = transaction;
-        } else {
-            this.transactions.push(transaction);
-        }
-    }
-
     getTransaction(id) {
         return this.transactions.find(t => t.id === id);
     }
@@ -35,5 +25,12 @@ export default class TransactionPool {
                 this.transactions = this.transactions.filter(t => t.id !== transaction.id);
             }
         }
+    }
+
+    validateTransactions() {
+        const validateTransactions = Object.values(this.transactions).filter(
+            (transaction) => Transaction.validate(transaction)
+        );
+        return validateTransactions; 
     }
 }

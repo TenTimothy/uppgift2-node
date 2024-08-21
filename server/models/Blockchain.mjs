@@ -62,10 +62,10 @@ export default class Blockchain {
     }
 
     minePendingTransactions(minerAddress, transactionPool) {
-        //const rewardTransaction = Transaction.createRewardTransaction({ minerWallet: { publicKey: minerAddress } });
-        const blockData = [transactionPool];
+        const rewardTransaction = Transaction.createRewardTransaction({ minerWallet: { publicKey: minerAddress } });
+        const pendingTransactions = transactionPool.validateTransactions()
+        const blockData = [...pendingTransactions, rewardTransaction];
         const newBlock = this.addBlock({ data: blockData });
-        //transactionPool.length = 0;
         return newBlock;
     }
 
