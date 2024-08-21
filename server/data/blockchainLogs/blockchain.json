@@ -8,72 +8,35 @@
     "difficulty": 3
   },
   {
-    "timestamp": 1724255058225,
+    "timestamp": 1724257799960,
     "lastHash": "0",
-    "hash": "1fb3648ab8bae9abd03b2dbb1a219aea6483dfa964a953be56d31d70ffcc7836",
+    "hash": "04fa0c735776f1c894e8a5c3804ca4860d561eb8b4c3f105bc0cc9cec351349c",
     "data": [
       {
-        "id": "802b7fbf8b6c41b39a64c556d7b8c192",
+        "id": "f4f9aa9a0d824ab09e99a15b94475946",
         "outputMap": {
-          "din-miner-adress-här": 50
+          "2": 10,
+          "R": 20,
+          "043379931b6022926bca4452cb8cef8810f9f385f27f7f94842e4b80248606733cf7ff735745952fe75ee9fbabe1cd706d5bd587df8f69956c68ad9572c5354aee": 970
         },
         "inputMap": {
-          "timestamp": 1724255058224,
-          "amount": 50,
-          "address": "*authorized-reward*",
-          "signature": null
-        }
-      }
-    ],
-    "nonce": 13,
-    "difficulty": 3
-  },
-  {
-    "timestamp": 1724255082962,
-    "lastHash": "1fb3648ab8bae9abd03b2dbb1a219aea6483dfa964a953be56d31d70ffcc7836",
-    "hash": "1c31e5e080502d843a6e8acf3bb2026b53bf3e7e9aa52633ed8bb94a40fcd0e6",
-    "data": [
-      {
-        "id": "9b8433e34cd04c609263529bc87ce94f",
-        "outputMap": {
-          "rowel": 30,
-          "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7": 970
-        },
-        "inputMap": {
-          "timestamp": 1724255064083,
+          "timestamp": 1724257738900,
           "amount": 1000,
-          "address": "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7",
+          "address": "043379931b6022926bca4452cb8cef8810f9f385f27f7f94842e4b80248606733cf7ff735745952fe75ee9fbabe1cd706d5bd587df8f69956c68ad9572c5354aee",
           "signature": {
-            "r": "fd35156037200a9ea28195a2a6ac60ff81ab3796f255f8f3732aca3d1287d9",
-            "s": "9127a902045db90945767a253da2e0d3cb564eff64d7f3d9c6e9e247ec39310e",
-            "recoveryParam": 0
+            "r": "f37d399118a8e66eb15e4144488e716297fe15c7ff9bd9cb8ff62991ae6a742f",
+            "s": "ce81105f431828b7b6186a2d281127a31e91abb28d0ca2e27f50d43085408588",
+            "recoveryParam": 1
           }
         }
       },
       {
-        "id": "603bc4903105460facc099a341602aeb",
-        "outputMap": {
-          "ten": 10,
-          "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7": 990
-        },
-        "inputMap": {
-          "timestamp": 1724255073432,
-          "amount": 1000,
-          "address": "045730518bb0d3349b5ab15751e6148acc70cf9a95853029dd56c741cd6d4dfa87380161595e8a29abe8c37ed2770971c7e8411e8d197c5e6001f4601747786dd7",
-          "signature": {
-            "r": "fd35156037200a9ea28195a2a6ac60ff81ab3796f255f8f3732aca3d1287d9",
-            "s": "9127a902045db90945767a253da2e0d3cb564eff64d7f3d9c6e9e247ec39310e",
-            "recoveryParam": 0
-          }
-        }
-      },
-      {
-        "id": "b4d9173052e8469f8c1feb588744b416",
+        "id": "bf6b051c697840efaa854a88f11ebe7e",
         "outputMap": {
           "din-miner-adress-här": 50
         },
         "inputMap": {
-          "timestamp": 1724255082944,
+          "timestamp": 1724257799946,
           "amount": 50,
           "address": "*authorized-reward*",
           "signature": null
@@ -81,6 +44,27 @@
       }
     ],
     "nonce": 1,
+    "difficulty": 3
+  },
+  {
+    "timestamp": 1724258088991,
+    "lastHash": "04fa0c735776f1c894e8a5c3804ca4860d561eb8b4c3f105bc0cc9cec351349c",
+    "hash": "0c729ada28bba14b0afe5038a91d13b5d29a6c0375c533d574fd46eec900b729",
+    "data": [
+      {
+        "id": "f32ac677033f4cc7a2080f86633312bf",
+        "outputMap": {
+          "04b306d464d5f157110bff52954ae219633e93294618338c11c5cfce878822de4658f53889f3a9f879663a227bf4f9ce496a94c1f72deef814e4bd18d93176100a": 50
+        },
+        "inputMap": {
+          "timestamp": 1724258088991,
+          "amount": 50,
+          "address": "*authorized-reward*",
+          "signature": null
+        }
+      }
+    ],
+    "nonce": 7,
     "difficulty": 3
   }
 ]

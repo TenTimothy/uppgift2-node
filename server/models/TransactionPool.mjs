@@ -33,4 +33,12 @@ export default class TransactionPool {
         );
         return validateTransactions; 
     }
+
+    transactionExist({ address }) {
+        const transactions = Object.values(this.transactions);
+        console.log('Transaction: ',transactions);
+        return transactions.find(
+            (transaction) => transaction.inputMap.address === address
+        );
+    }
 }

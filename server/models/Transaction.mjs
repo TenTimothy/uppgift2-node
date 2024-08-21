@@ -63,11 +63,7 @@ export default class Transaction {
             timestamp: Date.now(),
             amount: sender.balance,
             address: sender.publicKey,
-            signature: {
-                r: sender.sign(outputMap).r.toString('hex'),
-                s: sender.sign(outputMap).s.toString('hex'),
-                recoveryParam: sender.sign(outputMap).recoveryParam
-            }
+            signature: sender.sign(outputMap),
         };
     }
 

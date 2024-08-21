@@ -2,7 +2,7 @@ import asyncHandler from '../middlewares/asyncHandler.mjs';
 import ErrorResponse from '../utils/ErrorResponse.mjs';
 import Blockchain from '../models/Blockchain.mjs';
 import BlockchainDBModel from '../models/BlockchainDBModel.mjs';
-import { pubNubServer, blockchain, transactionPool } from "../server.mjs"; 
+import { pubNubServer, blockchain, transactionPool, wallet } from "../server.mjs"; 
 
 
 
@@ -43,7 +43,7 @@ export const mineBlock = (req, res, next) => {
         }
 
         
-        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool);
+        const newBlock = blockchain.minePendingTransactions(wallet.publicKey, transactionPool);
 
         res.status(201).json({
             success: true,
