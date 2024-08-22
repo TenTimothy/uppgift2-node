@@ -1,7 +1,6 @@
 import Wallet from '../models/Wallet.mjs';
-import { blockchain, transactionPool } from '../server.mjs';  
+import { blockchain, transactionPool, wallet } from '../server.mjs';  
 
-let wallet = new Wallet();
 
 export const getWalletInfo = (req, res, next) => {
     try {
@@ -32,7 +31,7 @@ export const createTransaction = (req, res, next) => {
             chain: blockchain.chain,
         });
 
-        transactionPool.setTransaction(transaction);
+        transactionPool.addTransactions(transaction);
 
         res.status(201).json({
             success: true,

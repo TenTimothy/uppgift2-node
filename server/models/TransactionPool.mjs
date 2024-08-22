@@ -2,21 +2,11 @@ import Transaction from './Transaction.mjs';
 
 export default class TransactionPool {
     constructor() {
-        this.transactions = [];
+        this.transactions = {};
     }
 
-    setTransactions(transactions) {
-        this.transactions = transactions;
-    }
-
-    addOrUpdateTransaction(transaction) {
-        const transactionIndex = this.transactions.findIndex(t => t.id === transaction.id);
-
-        if (transactionIndex >= 0) {
-            this.transactions[transactionIndex] = transaction;
-        } else {
-            this.transactions.push(transaction);
-        }
+    addTransaction(transaction) { 
+        this.transactions[transaction.id] = transaction;
     }
 
     getTransaction(id) {
@@ -24,7 +14,7 @@ export default class TransactionPool {
     }
 
     clear() {
-        this.transactions = [];
+        this.transactions = {};
     }
 
     clearBlockchainTransactions(chain) {
@@ -35,5 +25,19 @@ export default class TransactionPool {
                 this.transactions = this.transactions.filter(t => t.id !== transaction.id);
             }
         }
+    }
+
+    validateTransactions() {
+        const validateTransactions = Object.values(this.transactions).filter(
+            (transaction) => Transaction.validate(transaction)
+        );
+        return validateTransactions; 
+    }
+
+    transactionExist({ address }) {
+        const transactions = Object.values(this.transactions);
+        return transactions.find(
+            (transaction) => transaction.inputMap.address === address
+        );
     }
 }

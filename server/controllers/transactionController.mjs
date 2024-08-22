@@ -1,17 +1,21 @@
-import { transactionPool } from '../server.mjs';
-import Wallet from '../models/Wallet.mjs';
+import { transactionPool, wallet, blockchain, pubNubServer } from '../server.mjs';
 
 export const createTransaction = (req, res, next) => {
     try {
-        const { recipient, amount } = req.body;
-        const sender = new Wallet(); 
-        const transaction = sender.createTransaction({ recipient, amount });
+        const { recipient, amount } = req.body; 
+        let transaction = transactionPool.transactionExist({address: wallet.publicKey})
+       
+        if(transaction){
+            transaction.update({ sender: wallet, recipient, amount })
+       
+        } else {
+            transaction = wallet.createTransaction({ recipient, amount, chain: blockchain.chain });
+           
+        }   
 
-        transactionPool.addOrUpdateTransaction(transaction);
-
-        console.log('New Transaction:', transaction);
-        console.log('Current Transaction Pool:', transactionPool.transactions);
-
+        transactionPool.addTransaction(transaction); 
+        pubNubServer.broadcastTransaction(transaction); 
+        pubNubServer.broadcastTransactionPool();
         res.status(201).json({ success: true, data: transaction });
     } catch (error) {
         next(error);

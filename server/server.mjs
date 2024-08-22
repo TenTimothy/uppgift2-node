@@ -12,6 +12,7 @@ import transactionRoute from './routes/transactionRoute.mjs';
 import transactionPoolRoute from './routes/transactionPoolRoute.mjs';
 import Blockchain from './models/Blockchain.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
+import Wallet from './models/Wallet.mjs';
 import { errorHandler } from './middlewares/errorHandler.mjs';
 import { saveBlockchain } from './controllers/blockchainController.mjs';
 
@@ -38,12 +39,14 @@ const credentials = {
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
-const pubNubServer = new PubNubServerClass({ blockchain, credentials });
+const wallet = new Wallet();
+const pubNubServer = new PubNubServerClass({ blockchain, transactionPool, credentials });
 
-export { pubNubServer, blockchain, transactionPool };
+export { pubNubServer, blockchain, transactionPool, wallet };
 
 
-let NODE_PORT = process.env.PORT || 3001;
+let NODE_PORT = +process.env.PORT || 3001;
+let ROOT_NODE_ADDRESS = `http://localhost:${NODE_PORT}`;
 
 if (process.env.GENERATE_NODE_PORT === 'true') {
     
@@ -51,10 +54,7 @@ if (process.env.GENERATE_NODE_PORT === 'true') {
     NODE_PORT = 3002; 
 }
 
-const server = app.listen(NODE_PORT, () => {
-    console.log(`Server is running on port: ${NODE_PORT}`.bgYellow);
-    saveBlockchain(blockchain.chain);
-});
+
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/blockchain', blockchainRouter);
@@ -64,7 +64,27 @@ app.use('/api/v1/wallet', walletRouter);
 
 app.use(errorHandler);
 
-process.on('unhandledRejection', (err, promise) => {
-    console.log(`FEL: ${err.message}`);
-    server.close(() => process.exit(1));
+
+const synchronizeNode = async () => {
+    if (NODE_PORT !== 3001) { 
+        let response = await fetch(`${ROOT_NODE_ADDRESS}/api/v1/blockchain`);
+        if (response.ok) {
+            const result = await response.json();
+            blockchain.replaceChain(result.data); 
+        }
+
+        response = await fetch(`${ROOT_NODE_ADDRESS}/api/v1/transaction-pool`);
+        if (response.ok) {
+            const result = await response.json();
+            transactionPool.setTransactions = result.data; 
+        }
+    }
+};
+
+
+const server = app.listen(NODE_PORT, () => {
+    console.log(`Server is running on port: ${NODE_PORT}`.bgYellow);
+    synchronizeNode();
+    saveBlockchain(blockchain.chain);
 });
+

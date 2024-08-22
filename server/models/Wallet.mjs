@@ -6,7 +6,7 @@ export default class Wallet {
     constructor() {
         this.balance = INITIAL_BALANCE;
         this.keyPair = ellipticHash.genKeyPair();
-        this.publicKey = this.keyPair.getPublic().encodeCompressed('hex');
+        this.publicKey = this.keyPair.getPublic().encode('hex');
     };
 
     sign(data) {
@@ -14,6 +14,7 @@ export default class Wallet {
     };
 
     createTransaction({ recipient, amount, chain }) {
+
         if (chain) {
             this.balance = this.constructor.calculateBalance({
                 chain,
@@ -36,6 +37,7 @@ export default class Wallet {
             const block = chain[i];
 
             for (let transaction of block.data) {
+                
                 if (transaction.inputMap.address === address) {
                     hasAddedTransaction = true;
                 }
@@ -51,7 +53,7 @@ export default class Wallet {
                 break;
             }
         }
-
+        console.log('total value', total);
         return hasAddedTransaction ? total : INITIAL_BALANCE + total;
     }
 }

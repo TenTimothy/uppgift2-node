@@ -2,7 +2,7 @@ import asyncHandler from '../middlewares/asyncHandler.mjs';
 import ErrorResponse from '../utils/ErrorResponse.mjs';
 import Blockchain from '../models/Blockchain.mjs';
 import BlockchainDBModel from '../models/BlockchainDBModel.mjs';
-import { pubNubServer, blockchain, transactionPool } from "../server.mjs"; 
+import { pubNubServer, blockchain, transactionPool, wallet } from "../server.mjs"; 
 
 
 
@@ -19,7 +19,7 @@ export const getBlockchain = (req, res) => {
 
         res.status(200).json({
             success: true,
-            blockchain: chain, 
+            data: chain, 
         });
     } catch (error) {
         res.status(500).json({
@@ -43,8 +43,9 @@ export const mineBlock = (req, res, next) => {
         }
 
         
-        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool.transactions);
-
+        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool);
+        pubNubServer.broadcastBlockchain();
+        pubNubServer.broadcastTransactionPool(); 
         res.status(201).json({
             success: true,
             data: newBlock,
@@ -92,17 +93,35 @@ export const validateBlockchain = asyncHandler(async (req, res, next) => {
 export const saveBlockchain = async (blockchain) => {
     try {
         let blockchainDoc = await BlockchainDBModel.findOne({});
+        
         if (blockchainDoc) {
             blockchainDoc.blockchain = blockchain;
         } else {
             blockchainDoc = new BlockchainDBModel({ blockchain });
         }
+
+    
         await blockchainDoc.save();
+
         console.log("Blockchain saved to database.");
     } catch (err) {
-        console.error("Error saving blockchain to database:", err);
+        if (err.name === 'VersionError') {
+            console.log("Version mismatch error detected. Retrying save...");
+            
+            const blockchainDoc = await BlockchainDBModel.findOne({});
+            if (blockchainDoc) {
+                blockchainDoc.blockchain = blockchain;
+                await blockchainDoc.save(); 
+                console.log("Blockchain saved to database after retry.");
+            } else {
+                console.error("Failed to reload blockchain document for retry.", err);
+            }
+        } else {
+            console.error("Error saving blockchain to database:", err);
+        }
     }
 };
+
 
 
 export const loadBlockchain = async () => {

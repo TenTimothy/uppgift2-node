@@ -25,6 +25,17 @@ const buttonStyle = {
   boxSizing: 'border-box',  
 };
 
+const parseJwt = (token) => {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(atob(base64));
+  } catch (error) {
+    console.error('Failed to parse JWT:', error);
+    return null;
+  }
+};
+
 const SendTransactionPage = () => {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
@@ -33,14 +44,20 @@ const SendTransactionPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const token = localStorage.getItem('authToken');
+      const decodedToken = parseJwt(token);  
+      const senderPublicKey = decodedToken.publicKey; 
+
       const response = await fetch('http://localhost:3001/api/v1/transactions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`  
         },
         body: JSON.stringify({
+          sender: senderPublicKey,  
           recipient,
-          amount,
+          amount: parseFloat(amount), 
         }),
       });
 
@@ -49,12 +66,13 @@ const SendTransactionPage = () => {
         console.log('Transaction sent successfully:', data.data);
         navigate('/transaction-pool'); 
       } else {
-        console.error('Error sending transaction:', data.error);
+        console.error('Error sending transaction:', data.message);
       }
     } catch (error) {
       console.error('An unexpected error occurred:', error);
     }
   };
+  
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
