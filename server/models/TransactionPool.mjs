@@ -5,8 +5,8 @@ export default class TransactionPool {
         this.transactions = {};
     }
 
-    addTransactions(transactions) {
-        this.transactions[transactions.id] = transactions;
+    addTransaction(transaction) { 
+        this.transactions[transaction.id] = transaction;
     }
 
     getTransaction(id) {

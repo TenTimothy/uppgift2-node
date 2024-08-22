@@ -13,8 +13,9 @@ export const createTransaction = (req, res, next) => {
            
         }   
 
-        transactionPool.addTransactions(transaction);
-        pubNubServer.broadcastTransaction(transaction);
+        transactionPool.addTransaction(transaction); 
+        pubNubServer.broadcastTransaction(transaction); 
+        pubNubServer.broadcastTransactionPool();
         res.status(201).json({ success: true, data: transaction });
     } catch (error) {
         next(error);

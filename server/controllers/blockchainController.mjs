@@ -43,7 +43,7 @@ export const mineBlock = (req, res, next) => {
         }
 
         
-        const newBlock = blockchain.minePendingTransactions(wallet.publicKey, transactionPool);
+        const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool);
         pubNubServer.broadcast();
         res.status(201).json({
             success: true,
@@ -92,17 +92,35 @@ export const validateBlockchain = asyncHandler(async (req, res, next) => {
 export const saveBlockchain = async (blockchain) => {
     try {
         let blockchainDoc = await BlockchainDBModel.findOne({});
+        
         if (blockchainDoc) {
             blockchainDoc.blockchain = blockchain;
         } else {
             blockchainDoc = new BlockchainDBModel({ blockchain });
         }
+
+    
         await blockchainDoc.save();
+
         console.log("Blockchain saved to database.");
     } catch (err) {
-        console.error("Error saving blockchain to database:", err);
+        if (err.name === 'VersionError') {
+            console.log("Version mismatch error detected. Retrying save...");
+            
+            const blockchainDoc = await BlockchainDBModel.findOne({});
+            if (blockchainDoc) {
+                blockchainDoc.blockchain = blockchain;
+                await blockchainDoc.save(); 
+                console.log("Blockchain saved to database after retry.");
+            } else {
+                console.error("Failed to reload blockchain document for retry.", err);
+            }
+        } else {
+            console.error("Error saving blockchain to database:", err);
+        }
     }
 };
+
 
 
 export const loadBlockchain = async () => {
