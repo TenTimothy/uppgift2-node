@@ -44,7 +44,8 @@ export const mineBlock = (req, res, next) => {
 
         
         const newBlock = blockchain.minePendingTransactions(minerAddress, transactionPool);
-        pubNubServer.broadcast();
+        pubNubServer.broadcastBlockchain();
+        pubNubServer.broadcastTransactionPool(); 
         res.status(201).json({
             success: true,
             data: newBlock,
